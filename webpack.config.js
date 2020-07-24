@@ -39,7 +39,8 @@ module.exports = {
                     options:{
                         presets: [
                             "@babel/preset-env",
-                            "@babel/preset-react"
+                            "@babel/preset-react",
+                            {'plugins': ['@babel/plugin-proposal-class-properties']}
                         ],
                     }
                 },
@@ -48,6 +49,12 @@ module.exports = {
                 test: /\.css$/,
                 use: ["style-loader", {loader: "css-loader", options: {modules: true}}],
                 exclude: /node_modules/,
+            },
+            {
+                test: /\.(jpg|png)$/,
+                use: {
+                    loader: 'url-loader',
+                },
             }]
     },
     optimization: {
