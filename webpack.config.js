@@ -55,6 +55,18 @@ module.exports = {
                 use: {
                     loader: 'url-loader',
                 },
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
+            {
+                test: /\.txt$/,
+                use: 'raw-loader'
             }]
     },
     optimization: {

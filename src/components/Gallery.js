@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import doggy from '../images/doggy.png'
+// import doggy from '../images/doggy.png'
 // import style from './Gallery.css';
+// import txt from '../google_images/home_page.txt'
 
 // interface GalleryProps {
 //     images: string;     // folder with images to be displayed in the gallery
@@ -12,46 +13,74 @@ import doggy from '../images/doggy.png'
 
 
 class Gallery extends Component {
+    componentDidMount() {
+        // let path = '../google_images/';
+        // path = path.concat(folder).concat(".txt");
+        // let links = require(path);
+        // console.log(links);
+    }
     /**
      * Load images
      */
     importAll = (r) => {
-        // let images = {};
         return r.keys().map(r);
-        // r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-        // console.log("here are the images");
-        // console.log(images);
-        // return images
     }
 
+    /**
+     * Load google images
+     */
+    importImages = (folder) => {
+
+        // const lineReader = require('line-reader');
+        // let links = [];s
+        // let path = '../google_images/'
+        // lineReader.open(path.concat(folder), function(reader) {
+        //     if (reader.hasNextLine()) {
+        //         reader.nextLine(function(line) {
+        //             links.push(line);
+        //             console.log(line);
+        //         });
+        //     }
+        // });
+        // console.log(links);
+    }
+
+
+
     render() {
-        // const images = loadImages(require.contexts(this.props.images, false, /\.(png|jpe?g|svg)$/));
-        // console.log(doggy);
-        const images = this.importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
-        console.log("these are the images");
+        // FOR LOCAL
+        // const images = this.importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
+        // console.log("these are the images");
+        // console.log(images);
+        // let imgs = [];
+        // for (let [index, module] of Object.entries(images)) {
+        //     console.log(index);
+        //     console.log(module['default']);
+        //     imgs.push(<img src={module['default']}/>);
+        // }
+
+        const images = this.importAll(require.context('../google_images', false, /\.txt$/));
         console.log(images);
+
         let imgs = [];
         for (let [index, module] of Object.entries(images)) {
-            // let path = "../images/".concat(src);
-            // let path = images('./' + props.imageName);
-            console.log(index);
+            let links = module['default'].split('\n').filter(x => x);
+            for (let link of links) {
+                let category = link.split(/:(.+)/)[0];
+                let src = link.split(/:(.+)/)[1];
+                // TODO: clean up and filter by category
+                console.log(category);
+                console.log(src);
+                imgs.push(<img src={src}/>);
+            }
+            console.log(links);
             console.log(module['default']);
-            imgs.push(<img src={module['default']}/>);
         }
-        // console.log("here are the tags");
-        // console.log(imgs);
-
-
-        // console.log("here's the values");
-        console.log(images['doggy.png']);
-        // console.log(images[0]);
         return (
             <div style={{border: '3px solid green'}}>
                 <p>GALLERY</p>
                 {imgs}
-                <img src={images['doggy.png']}/>
-                <img src={doggy} style={{border: '3px solid blue'}} />
-                <img src={doggy} style={{border: '3px solid blue'}} />
+                {/*<img src='https://drive.google.com/uc?export=view&id=1OaL9ky8ppnhRxpoFR2zEvzauX8Ksl9iS'/>*/}
             </div>
         );
     }
