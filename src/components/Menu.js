@@ -7,14 +7,15 @@ class Menu extends Component {
             <div id={style.menu}>
                 <a href="./index.html">HOME</a>
                 <a href="./about.html">ABOUT</a>
-                <div className={style.dropdown}>
-                    <button className={style.dropbtn}>GALLERY</button>
-                    <div className={style['dropdown-content']}>
-                        <a href="">all</a>
-                        <a href="">birthday</a>
-                        <a href="">thank you</a>
-                    </div>
-                </div>
+                <a href="./gallery.html">GALLERY</a>
+                {/*<div className={style.dropdown}>*/}
+                {/*    <button className={style.dropbtn}>GALLERY</button>*/}
+                {/*    <div className={style['dropdown-content']}>*/}
+                {/*        <a href="">all</a>*/}
+                {/*        <a href="">birthday</a>*/}
+                {/*        <a href="">thank you</a>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 <div className={style.dropdown}>
                     <button className={style.dropbtn}>REQUEST</button>
                     <div className={style['dropdown-content']}>

@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
 
+// interface CategorySelectorProps {
+//     selected: string;                       // selected category
+//     onChange(newCategory: string): void;    // called when new category chosen
+// }
+
 class CategorySelector extends Component {
+
+    handleCategoryChange = (event) => {
+        this.props.onChange(event.target.value);
+    }
+
     render() {
+        let buttons = [];
+
+        for (let i = 0; i < this.props.categories.length; i++) {
+            buttons.push(
+                <label>
+                    <input type="radio" value={this.props.categories[i]}
+                           checked={this.props.selected === this.props.categories[i]}
+                           onChange={this.handleCategoryChange}/>
+                    {this.props.categories[i].replace(/_/g, " ")}
+                </label>
+            )
+            buttons.push(
+                <br/>
+            )
+        }
         return (
-            <div id={style.menu}>
-                <a href="./index.html">HOME</a>
-                <a href="./about.html">ABOUT</a>
-                <div className={style.dropdown}>
-                    <button className={style.dropbtn}>GALLERY</button>
-                    <div className={style['dropdown-content']}>
-                        <a href="">all</a>
-                        <a href="">birthday</a>
-                        <a href="">thank you</a>
-                    </div>
-                </div>
-                <div className={style.dropdown}>
-                    <button className={style.dropbtn}>REQUEST</button>
-                    <div className={style['dropdown-content']}>
-                        <a href="">choose existing design</a>
-                        <a href="">start from scratch</a>
-                    </div>
-                </div>
+            <div>
+                {buttons}
             </div>
         );
     }
 }
 
-export default Menu;
+export default CategorySelector;
