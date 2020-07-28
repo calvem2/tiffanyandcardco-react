@@ -1,36 +1,108 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital,wght@0,400;1,900&display=swap');
-/* Style gallery*/
+@import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
 /*#gallery {*/
-/*    float: left;*/
+/*    display: flex;*/
+/*    justify-content:center;*/
 /*}*/
 
-/* Style for image grid*/
+/* container for rows of images */
 #gallery-container {
     display: flex;
     flex-direction: column;
-    margin-left: 200px;
-    margin-right: 200px;
+    /*position: absolute;*/
+    /*align-self: center;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*margin-left: -100px;*/
+    /*top: 50%;*/
+    /*margin-top: -50px;*/
+    /*transform: translate(-50%, -50%)*/
+    /*margin-left: 200px;*/
+    /*margin-right: 200px;*/
 }
 
+/* rows of images */
 #gallery-container .row {
     /*font-size: 30px;*/
-    text-align: center;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: auto;
 }
 
-#gallery-container .row img {
+/* containers for each individual image*/
+.img-container {
+    /*padding: 0px 5px 5px 5px;*/
+    /*display: inline;*/
+    width: 250px;
+    height: 250px;
+    margin: 5px 5px 5px 5px;
+    /*border: solid 3px red;*/
+    position: relative;
+}
+
+/* individual images */
+.gallery-img {
     /*padding-right: 5px;*/
     /*padding-left: 5px;*/
     /*padding-bottom: 5px;*/
-    padding: 0px 5px 5px 5px;
+    /*padding-bottom: 5px;*/
     width: 250px;
     height: 250px;
 }
 
+/* descriptions for each individual image*/
+.description {
+    /* size*/
+    width: 230px;
+    height: 230px;
+    margin: 0;
+
+    /* align with image container */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* text alignment */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* style */
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    border: 10px solid #ACD9C6;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 11pt;
+
+    /* hover effect */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s, visibility .2s;
+}
+
+.description p {
+    /*border: solid 2px red;*/
+    margin: 5px;
+}
+
+
+/* make description visible on hover */
+.img-container:hover .description {
+    visibility: visible;
+    opacity: 1;
+}
+
 /* Selector style */
 #category-selector {
-    float: left;
+    /*float: left;*/
     width: 100px;
-    margin-left: 100px;
+    margin-left: 5px;
+    padding-right: 0px;
+    position: absolute;
+    left: 50px;
 }
 
 #gallery-container, #category-selector {

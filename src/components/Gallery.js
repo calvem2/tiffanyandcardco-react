@@ -70,71 +70,108 @@ class Gallery extends Component {
             case "holiday":
                 return this.importAll(require.context('../card_images/holiday', false, /\.txt$/));
             case "retirement":
-                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+                return this.importAll(require.context('../card_images/retirement', false, /\.txt$/));
             case "thank_you":
-                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+                return this.importAll(require.context('../card_images/thank_you', false, /\.txt$/));
             case "wedding":
-                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+                return this.importAll(require.context('../card_images/wedding', false, /\.txt$/));
         }
     }
 
     /**
      * Produces array img tags to be rendered on the page
      */
-    makeGallery = () => {
+    makeGalleryImgs = () => {
         let imageFile = this.getGoogleImages();
-        let imgs = [];
-
         let images = imageFile[0]['default'].split('\n').filter(x => x);
         // only display a subset of images if we're on the home page
         if (this.state.category === "home_page") {
             images = _.sample(images, 20);
         }
-        // for (let imgInfo of images) {
-        //
-        //     // let category = img.split(/:(.+)/)[0];
-        //     // let src = img.split(/:(.+)/)[1];
-        //     let src = imgInfo.split(",")[0];
-        //     let description = imgInfo.split(",")[1].split(";");
-        //     console.log(description);
-        //     console.log(src);
-        //     imgs.push(<img src={src}/>);
-        // }git
-
-        // construct rows of five images
-        let i;
-        for (i = 0; i < images.length - 5; i+= 5) {
+        // create tags for individual elements
+        let imgs = [];
+        for (let imgInfo of images) {
+            let src = imgInfo.split(",")[0];
+            let descriptionText = imgInfo.split(",")[1].split(";");
+            let description = [];
+            for (let line of descriptionText) {
+                description.push(<p>{line}</p>)
+            }
             imgs.push(
-                <div className={style.row}>
-                    <img src={images[i].split(",")[0]}/>
-                    <img src={images[i + 1].split(",")[0]}/>
-                    <img src={images[i + 2].split(",")[0]}/>
-                    <img src={images[i + 3].split(",")[0]}/>
-                    <img src={images[i + 4].split(",")[0]}/>
+                <div className={style['img-container']}>
+                    <img className={style['gallery-img']} src={src}/>
+                    {this.state.category !== "home_page" &&
+                    <div className={style.description}>{description}</div>
+                    }
                 </div>
             );
         }
+        return imgs;
+    }
+
+    /**
+     * Produces array of rows of images for gallery
+     */
+    makeGalleryRows = (imgs) => {
+        // construct rows of five images
+        // let i;
+        console.log(imgs);
+        console.log(imgs.length);
+        let rows = [];
+        let numPerRow = (this.state.category === "home_page") ? 5 : 4;
+        let numRows = imgs.length / numPerRow;
+        for (let i = 0; i < numRows; i++) {
+            rows.push(
+                <div className={style.row}>
+                    {imgs.splice(0, numPerRow)}
+                </div>
+            );
+        }
+        // add any leftover images to last row
+        if (imgs.length > 0) {
+            rows.push(
+                <div className={style.row}>
+                    {imgs.splice(0, imgs.length)}
+                </div>
+            );
+        }
+        // for (i = 0; i < imgs.length - numPerRow; i+= numPerRow) {
+        //     rows.push(
+        //         <div className={style.row}>
+        //             {/*{imgs[i]}*/}
+        //             {/*{imgs[i + 1]}*/}
+        //             {/*{imgs[i + 2]}*/}
+        //             {/*{imgs[i + 3]}*/}
+        //             {/*{imgs[i + 4]}*/}
+        //             {/*<img src={images[i + 1].split(",")[0]}/>*/}
+        //             {/*<img src={images[i + 2].split(",")[0]}/>*/}
+        //             {/*<img src={images[i + 3].split(",")[0]}/>*/}
+        //             {/*<img src={images[i + 4].split(",")[0]}/>*/}
+        //         </div>
+        //     );
+        // }
 
         // construct last row of any leftover images
-        let lastRow = [];
-        for (i; i < images.length; i++) {
-            lastRow.push(<img src={images[i].split(",")[0]}/>);
-        }
-        imgs.push(<div className={style.row}>{lastRow}</div>);
+        // let lastRow = [];
+        // for (i; i < imgs.length; i++) {
+        //     lastRow.push(imgs[i]);
+        //     // lastRow.push(<img src={images[i].split(",")[0]}/>);
+        // }
+        // rows.push(<div className={style.row}>{lastRow}</div>);
 
-        return imgs;
+        return rows;
     }
 
 
     render() {
-        let imgs = this.makeGallery();
+        let rows = this.makeGalleryRows(this.makeGalleryImgs());
 
         return (
             <div id={style.gallery}>
                 {this.state.category !== "home_page" &&
                     <CategorySelector selected={this.state.category} categories={categories} onChange={this.updateCategory}/>
                 }
-                <div id={style['gallery-container']}>{imgs}</div>
+                <div id={style['gallery-container']}>{rows}</div>
             </div>
         );
     }
