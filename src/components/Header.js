@@ -5,11 +5,11 @@ import style from './Header.css';
 class Header extends Component {
     render() {
         return (
-            <div>
+            <div id={style.header}>
                 <a id={style.logo} href={"./index.html"}>
                     <div>Tiffany & Card Co.</div>
                 </a>
-                <Menu/>
+                <Menu selected={this.props.menuValue}/>
             </div>
         );
     }
