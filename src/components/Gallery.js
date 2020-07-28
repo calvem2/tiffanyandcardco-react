@@ -2,22 +2,9 @@ import React, { Component } from 'react';
 import CategorySelector from "./CategorySelector";
 import style from './Gallery.css';
 import * as _ from "underscore";
-// import doggy from '../images/doggy.png'
-// import style from './Gallery.css';
-// import txt from '../card_images/home_page.txt'
 
-// interface GalleryProps {
-//     initialCategory: string;     // initial category of images to display
-// }
-
-// constructor(props: GalleryProps) {
-//     super(props);
-// }
-// interface GalleryState {
-//     category: string;     // category of images to display
-// }
-
-const categories = ["all", "birthday", "thank_you"];
+const categories = ["all", "birthday", "calendar", "congratulations", "get_well", "graduation",
+                    "holiday", "retirement", "thank_you", "wedding"];
 
 class Gallery extends Component {
     constructor(props) {
@@ -27,12 +14,6 @@ class Gallery extends Component {
         };
     }
 
-    // componentDidMount() {
-        // let path = '../card_images/';
-        // path = path.concat(folder).concat(".txt");
-        // let links = require(path);
-        // console.log(links);
-    // }
 
     /**
      * Update the selected category value
@@ -68,15 +49,33 @@ class Gallery extends Component {
      * Load images from text files containing info about images stored on google drive
      */
     getGoogleImages = () => {
-        if (this.state.category === 'home_page' || this.state.category === 'all') {
-            return this.importAll(require.context('../card_images/all', false, /\.txt$/));
-        } else if (this.state.category === 'birthday') {
-            return this.importAll(require.context('../card_images/birthday', false, /\.txt$/));
-        } else if (this.state.category === 'thank_you') {
-            return this.importAll(require.context('../card_images/thank_you', false, /\.txt$/));
+        switch (this.state.category) {
+            case "home_page":
+            case "all":
+                return this.importAll(require.context('../card_images/all', false, /\.txt$/));
+            case "best_wishes":
+                return this.importAll(require.context('../card_images/best_wishes', false, /\.txt$/));
+            case "birthday":
+                return this.importAll(require.context('../card_images/birthday', false, /\.txt$/));
+            case "calendar":
+                return this.importAll(require.context('../card_images/calendar', false, /\.txt$/));
+            case "congratulations":
+                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+            case "get_well":
+                return this.importAll(require.context('../card_images/get_well', false, /\.txt$/));
+            case "graduation":
+                return this.importAll(require.context('../card_images/graduation', false, /\.txt$/));
+            case "greeting":
+                return this.importAll(require.context('../card_images/greeting', false, /\.txt$/));
+            case "holiday":
+                return this.importAll(require.context('../card_images/holiday', false, /\.txt$/));
+            case "retirement":
+                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+            case "thank_you":
+                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+            case "wedding":
+                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
         }
-        // const images = this.importAll(require.context('../card_images', false, /\.txt$/));
-        // console.log(images);
     }
 
     /**
@@ -86,9 +85,6 @@ class Gallery extends Component {
         let imageFile = this.getGoogleImages();
         let imgs = [];
 
-        // console.log(imageFile[0]);
-        // for (let [index, module] of Object.entries(imageFile)) {
-            // split file by line, filtering out empty strings
         let images = imageFile[0]['default'].split('\n').filter(x => x);
         // only display a subset of images if we're on the home page
         if (this.state.category === "home_page") {
@@ -103,7 +99,7 @@ class Gallery extends Component {
         //     console.log(description);
         //     console.log(src);
         //     imgs.push(<img src={src}/>);
-        // }
+        // }git
 
         // construct rows of five images
         let i;
@@ -134,13 +130,11 @@ class Gallery extends Component {
         let imgs = this.makeGallery();
 
         return (
-            <div className={style.gallery}>
-                {/*render selector if not on home page*/}
+            <div id={style.gallery}>
                 {this.state.category !== "home_page" &&
                     <CategorySelector selected={this.state.category} categories={categories} onChange={this.updateCategory}/>
                 }
-                {imgs}
-                {/*<img src='https://drive.google.com/uc?export=view&id=1OaL9ky8ppnhRxpoFR2zEvzauX8Ksl9iS'/>*/}
+                <div id={style['gallery-container']}>{imgs}</div>
             </div>
         );
     }
