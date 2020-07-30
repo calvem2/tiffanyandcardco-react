@@ -8,6 +8,7 @@
 #gallery-container {
     display: flex;
     flex-direction: column;
+    /*margin-bottom: 25px;*/
     /*position: absolute;*/
     /*align-self: center;*/
     /*top: 50%;*/
@@ -36,7 +37,7 @@
     height: 250px;
     margin: 5px 5px 5px 5px;
     /*border: solid 3px red;*/
-    position: relative;
+    /*position: relative;*/
 }
 
 /* individual images */
@@ -72,8 +73,8 @@
     /* style */
     background: rgba(255, 255, 255, 0.9);
     color: black;
-    border: 10px solid #ACD9C6;
-    font-family: 'Playfair Display', serif;
+    border: 10px solid rgba(172, 217, 198, .7);
+    font-family: 'Mulish', sans-serif;
     font-style: italic;
     font-size: 11pt;
 

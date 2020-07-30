@@ -89,3 +89,33 @@
 #menu a:hover, .dropdown:hover .dropbtn {
     color: #ACD9C6;
 }
+
+/* style container for instagram link*/
+#footer {
+    position: relative;
+    /*text-align: center;*/
+    margin: 15px auto;
+    background-color: rgba(172, 217, 198, .7);
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+}
+
+/* change footer background color on hover */
+#footer:hover {
+    background-color: #ACD9C6;
+}
+/* style instagram link*/
+#footer a {
+    /*background-color: black;*/
+}
+
+/* style footer instagram logo */
+#footer img{
+    /*background-color: pink;*/
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
+}
