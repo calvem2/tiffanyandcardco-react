@@ -4,7 +4,7 @@ import style from './Gallery.css';
 import * as _ from "underscore";
 
 const categories = ["all", "birthday", "calendar", "congratulations", "get_well", "graduation",
-                    "holiday", "retirement", "thank_you", "wedding"];
+                    "greeting", "holiday", "retirement", "thank_you", "wedding"];
 
 class Gallery extends Component {
     constructor(props) {
@@ -38,8 +38,8 @@ class Gallery extends Component {
         console.log(images);
         let imgs = [];
         for (let [index, module] of Object.entries(images)) {
-            console.log(index);
-            console.log(module['default']);
+            // console.log(index);
+            // console.log(module['default']);
             imgs.push(<img src={module['default']}/>);
         }
         return imgs;
@@ -49,41 +49,56 @@ class Gallery extends Component {
      * Load images from text files containing info about images stored on google drive
      */
     getGoogleImages = () => {
+        let images;
         switch (this.state.category) {
             case "home_page":
             case "all":
-                return this.importAll(require.context('../card_images/all', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/all', false, /\.txt$/));
+                break;
             case "best_wishes":
-                return this.importAll(require.context('../card_images/best_wishes', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/best_wishes', false, /\.txt$/));
+                break;
             case "birthday":
-                return this.importAll(require.context('../card_images/birthday', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/birthday', false, /\.txt$/));
+                break;
             case "calendar":
-                return this.importAll(require.context('../card_images/calendar', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/calendar', false, /\.txt$/));
+                break;
             case "congratulations":
-                return this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/congratulations', false, /\.txt$/));
+                break;
             case "get_well":
-                return this.importAll(require.context('../card_images/get_well', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/get_well', false, /\.txt$/));
+                break;
             case "graduation":
-                return this.importAll(require.context('../card_images/graduation', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/graduation', false, /\.txt$/));
+                break;
             case "greeting":
-                return this.importAll(require.context('../card_images/greeting', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/greeting', false, /\.txt$/));
+                break;
             case "holiday":
-                return this.importAll(require.context('../card_images/holiday', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/holiday', false, /\.txt$/));
+                break;
             case "retirement":
-                return this.importAll(require.context('../card_images/retirement', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/retirement', false, /\.txt$/));
+                break;
             case "thank_you":
-                return this.importAll(require.context('../card_images/thank_you', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/thank_you', false, /\.txt$/));
+                break;
             case "wedding":
-                return this.importAll(require.context('../card_images/wedding', false, /\.txt$/));
+                images = this.importAll(require.context('../card_images/wedding', false, /\.txt$/));
         }
+        // return images;
+        return images[0]['default'].split('\n').filter(x => x)
     }
 
     /**
      * Produces array img tags to be rendered on the page
      */
     makeGalleryImgs = () => {
-        let imageFile = this.getGoogleImages();
-        let images = imageFile[0]['default'].split('\n').filter(x => x);
+        // let imageFile = this.getGoogleImages();
+        // let images = imageFile[0]['default'].split('\n').filter(x => x);
+        let images = this.getGoogleImages();
         // only display a subset of images if we're on the home page
         if (this.state.category === "home_page") {
             images = _.sample(images, 20);
@@ -114,9 +129,6 @@ class Gallery extends Component {
      */
     makeGalleryRows = (imgs) => {
         // construct rows of five images
-        // let i;
-        console.log(imgs);
-        console.log(imgs.length);
         let rows = [];
         let numPerRow = (this.state.category === "home_page") ? 5 : 4;
         let numRows = imgs.length / numPerRow;
@@ -165,9 +177,8 @@ class Gallery extends Component {
 
     render() {
         let rows = this.makeGalleryRows(this.makeGalleryImgs());
-
         return (
-            <div id={style.gallery}>
+            <div>
                 {this.state.category !== "home_page" &&
                     <CategorySelector selected={this.state.category} categories={categories} onChange={this.updateCategory}/>
                 }

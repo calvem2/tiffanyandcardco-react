@@ -1,0 +1,44 @@
+/* DESIGN CHOOSER*/
+
+/* style list of options*/
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* hide checkboxes */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* style unselected choice */
+label {
+    border: 3px solid white;
+    height: 250px;
+    width: 250px;
+    display: block;
+    margin: 5px;
+    cursor: pointer;
+
+}
+
+/* style selected choices */
+:checked + label {
+    border-color: #FE9898;
+}
+
+/* style choice images */
+label img {
+    height: 250px;
+    width: 250px;
+    transition-duration: 0.2s;
+    transform-origin: 50% 50%;
+}
+
+/* style images for selected choices */
+:checked + label img {
+    transform: scale(0.95);
+    /* box-shadow: 0 0 5px #333; */
+    z-index: -1;
+}

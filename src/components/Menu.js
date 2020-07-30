@@ -31,7 +31,8 @@ class Menu extends Component {
                         REQUEST
                     </button>
                     <div className={style['dropdown-content']}>
-                        <a href="">choose existing design</a>
+                        <a href="./inventory.html">inventory</a>
+                        <a href="">start from existing design</a>
                         <a href="">start from scratch</a>
                     </div>
                 </div>
