@@ -45,7 +45,7 @@ class DesignChooser extends Component {
                         id={src} onChange={this.handleCheckboxChange}
                         checked={this.props.selections.has(src)}
                     />
-                    <label htmlFor={src}>
+                    <label htmlFor={src} className={style["design-choice"]}>
                         <img src={src}/>
                     </label>
                 </li>
@@ -88,38 +88,37 @@ class DesignChooser extends Component {
                     </div>
                 </div>
             );
-        } else {
-            // sort stamp images into categories
-            let stamps = new Map();
-            let images = this.getGoogleImages();
-            for (let imgInfo of images) {
-                let category = imgInfo.split(",")[1];
-                if (stamps.get(category) === undefined) {
-                    stamps.set(category, []);
-                }
-                stamps.get(category).push(imgInfo);
-            }
-
-            // get checkboxes for each category
-            let sections = [];
-            for (let [category, images] of stamps) {
-                sections.push(
-                    <div className={style.section}>
-                        <h2>{category}</h2>
-                        <ul>
-                            {this.makeCheckboxes(images)}
-                        </ul>
-                    </div>
-
-                )
-            }
-            return (
-                <div className={style["form-group"]}>
-                    {sections}
-                </div>
-            );
         }
 
+        // sort stamp images into categories
+        let stamps = new Map();
+        let images = this.getGoogleImages();
+        for (let imgInfo of images) {
+            let category = imgInfo.split(",")[1];
+            if (stamps.get(category) === undefined) {
+                stamps.set(category, []);
+            }
+            stamps.get(category).push(imgInfo);
+        }
+
+        // get checkboxes for each category
+        let sections = [];
+        for (let [category, images] of stamps) {
+            sections.push(
+                <div className={style.section}>
+                    <h2>{category}</h2>
+                    <ul>
+                        {this.makeCheckboxes(images)}
+                    </ul>
+                </div>
+
+            )
+        }
+        return (
+            <div className={style["form-group"]}>
+                {sections}
+            </div>
+        );
     }
 }
 
