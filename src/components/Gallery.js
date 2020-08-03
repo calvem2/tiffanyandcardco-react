@@ -3,7 +3,7 @@ import CategorySelector from "./CategorySelector";
 import style from './Gallery.css';
 import * as _ from "underscore";
 
-const categories = ["all", "birthday", "calendar", "congratulations", "get_well", "graduation",
+const CATEGORIES = ["all", "birthday", "calendar", "congratulations", "get_well", "graduation",
                     "greeting", "holiday", "retirement", "thank_you", "wedding"];
 
 class Gallery extends Component {
@@ -180,7 +180,7 @@ class Gallery extends Component {
         return (
             <div>
                 {this.state.category !== "home_page" &&
-                    <CategorySelector selected={this.state.category} categories={categories} onChange={this.updateCategory}/>
+                    <CategorySelector selected={this.state.category} categories={CATEGORIES} onChange={this.updateCategory}/>
                 }
                 <div id={style['gallery-container']}>{rows}</div>
             </div>

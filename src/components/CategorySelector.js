@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import style from "components/Gallery.css";
 
-// interface CategorySelectorProps {
-//     selected: string;                       // selected category
-//     onChange(newCategory: string): void;    // called when new category chosen
-// }
-
 class CategorySelector extends Component {
+    // props
+    // selected: current category selected
+    // onChange: function for change to category selected
 
     handleCategoryChange = (event) => {
         this.props.onChange(event.target.value);
@@ -17,7 +15,8 @@ class CategorySelector extends Component {
 
         for (let i = 0; i < this.props.categories.length; i++) {
             buttons.push(
-                <label style={this.props.selected === this.props.categories[i] ? {color:'#FE9898'} : {color:'#BABEBF'}}>
+                <label
+                    className={this.props.selected === this.props.categories[i] ? style.selected : style.unselected}>
                     <input type="radio" value={this.props.categories[i]}
                            checked={this.props.selected === this.props.categories[i]}
                            onChange={this.handleCategoryChange}/>
