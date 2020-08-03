@@ -38,9 +38,19 @@
 #menu a {
     /*float: left;*/
     font-size: 16px;
-    color: black;
+    /*color: black;*/
     padding: 14px 16px;
     text-decoration: none;
+}
+
+/* style selected menu item*/
+.selected {
+    color: #ACD9C6
+}
+
+/* style unselected menu items */
+.unselected {
+    color: black;
 }
 
 /* The dropdown container */

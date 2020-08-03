@@ -1,3 +1,5 @@
+/*TODO: standardize color formats*/
+
 @import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
 /*#gallery {*/
 /*    display: flex;*/
@@ -37,7 +39,7 @@
     height: 250px;
     margin: 5px 5px 5px 5px;
     /*border: solid 3px red;*/
-    /*position: relative;*/
+    position: relative;
 }
 
 /* individual images */
@@ -96,6 +98,8 @@
     opacity: 1;
 }
 
+/* CATEGORY SELECTOR */
+
 /* Selector style */
 #category-selector {
     /*float: left;*/
@@ -122,4 +126,12 @@ label {
     /*border: 3px solid blue;*/
     font-family: 'Mulish', sans-serif;
     /*padding-bottom: 5px;*/
+}
+
+label.selected {
+    color: #FE9898;
+}
+
+label.unselected {
+    color: #BABEBF;
 }

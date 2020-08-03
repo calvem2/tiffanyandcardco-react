@@ -1,39 +1,41 @@
 import React, { Component } from 'react';
+import classNames from 'classnames/bind';
 import style from './Header.css';
 
+const cx = classNames.bind(style);
 class Menu extends Component {
+    // props
+    // selected: menu item currently selected
+
     render() {
         return (
             <div id={style.menu}>
                 <a href="./index.html"
-                   style={this.props.selected === "home" ? {color: '#ACD9C6'} : {color: 'black'}}>
+                   className={this.props.selected === "home" ? style.selected : style.unselected}>
                     HOME
                 </a>
                 <a href="./about.html"
-                   style={this.props.selected === "about" ? {color: '#ACD9C6'} : {color: 'black'}}>
+                   className={this.props.selected === "about" ? style.selected : style.unselected}>
                     ABOUT
                 </a>
                 <a href="./gallery.html"
-                   style={this.props.selected === "gallery" ? {color: '#ACD9C6'} : {color: 'black'}}>
+                   className={this.props.selected === "gallery" ? style.selected : style.unselected}>
                     GALLERY
                 </a>
-                {/*<div className={style.dropdown}>*/}
-                {/*    <button className={style.dropbtn}>GALLERY</button>*/}
-                {/*    <div className={style['dropdown-content']}>*/}
-                {/*        <a href="">all</a>*/}
-                {/*        <a href="">birthday</a>*/}
-                {/*        <a href="">thank you</a>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
                 <div className={style.dropdown}>
-                    <button className={style.dropbtn}
-                            style={this.props.selected === "request" ? {color: '#ACD9C6'} : {color: 'black'}}>
+                    <button className={cx({
+                                        dropbtn: true,
+                                        selected: this.props.selected.includes("request"),
+                                        unselected: !this.props.selected.includes("request")})}>
                         REQUEST
                     </button>
                     <div className={style['dropdown-content']}>
-                        <a href="./inventory.html">inventory</a>
-                        <a href="">start from existing design</a>
-                        <a href="">start from scratch</a>
+                        <a className={this.props.selected.includes("inventory") ? style.selected : style.unselected}
+                           href="./inventory.html">inventory</a>
+                        <a className={this.props.selected.includes("choose") ? style.selected : style.unselected}
+                           href="">choose from existing design</a>
+                        <a className={this.props.selected.includes("scratch") ? style.selected : style.unselected}
+                           href="">start from scratch</a>
                     </div>
                 </div>
             </div>
