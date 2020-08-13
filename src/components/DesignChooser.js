@@ -7,7 +7,7 @@ class DesignChooser extends Component {
     // props
     // currentStep: current step in multi-form
     // formType: type of form (inventory, custom, cards)
-    // selections: choices selected
+    // designChoices: choices selected
     // handleChange: event handler for change to form
 
     /**
@@ -40,12 +40,15 @@ class DesignChooser extends Component {
         let choices = [];
         for (let imgInfo of images) {
             let src = imgInfo.split(",")[0];
+            // Check to see if card image or stamp image for custom card has been checked
+            let checked = this.props.designChoices.hasOwnProperty(src) ||
+                (this.props.designChoices.hasOwnProperty("custom") && this.props.designChoices["custom"]["stamps"].includes(src));
             choices.push(
                 <li>
                     <input
                         type="checkbox"
                         id={src} onChange={this.handleCheckboxChange}
-                        checked={this.props.selections.has(src)}
+                        checked={checked}
                     />
                     <label htmlFor={src} className={style["design-choice"]}>
                         <img src={src}/>
@@ -60,11 +63,22 @@ class DesignChooser extends Component {
      * Handle change to checkbox
      */
     handleCheckboxChange = (event) => {
-        let selections = this.props.selections;
+        let selections = this.props.designChoices;
         if (!event.target.checked) {
-            selections.delete(event.target.id);
-        } else if (this.props.formType !== "custom" || selections.size < MAX_SELECTIONS) {
-            selections.set(event.target.id, {quantity: 1, notes: ""});
+            if (this.props.formType !== "custom") {
+                delete selections[event.target.id];
+            } else {
+                selections["custom"]["stamps"].splice(selections["custom"]["stamps"].indexOf(event.target.id), 1);
+            }
+        } else if (Object.keys(selections).length < MAX_SELECTIONS) {
+            // update appropriate data for custom card or inventory/from existing
+            if (this.props.formType !== "custom") {
+                selections[event.target.id] = {quantity: 1, notes: ""};
+            } else {
+                let stampSelections = selections.hasOwnProperty("custom") ? selections["custom"]["stamps"] : [];
+                stampSelections.push(event.target.id);
+                selections["custom"] = {quantity: 1, notes: "", stamps: stampSelections, colors: [], occasion: ""};
+            }
             event.target.checked = true;
         } else {
             event.target.checked = false;
@@ -92,24 +106,25 @@ class DesignChooser extends Component {
 
         // render section for each category of stamps for custom request form
         // sort stamp images into categories
-        let stamps = new Map();
+        let stamps = {};
         let images = this.getGoogleImages();
         for (let imgInfo of images) {
+            // TODO: you'll have to change this (split on ; too) if you add stamp set names
             let category = imgInfo.split(",")[1];
-            if (stamps.get(category) === undefined) {
-                stamps.set(category, []);
+            if (!stamps.hasOwnProperty(category)) {
+                stamps[category] = [];
             }
-            stamps.get(category).push(imgInfo);
+            stamps[category].push(imgInfo);
         }
 
         // get checkboxes for each category
         let sections = [];
-        for (let [category, images] of stamps) {
+        for (let category in stamps) {
             sections.push(
                 <div className={style.section}>
                     <h3>{category}</h3>
                     <ul>
-                        {this.makeCheckboxes(images)}
+                        {this.makeCheckboxes(stamps[category])}
                     </ul>
                 </div>
 
@@ -127,6 +142,10 @@ class DesignChooser extends Component {
      * Renders section for choosing color preferences
      */
     colorChooser = () => {
+        if (this.props.formType !== "custom") {
+            return null;
+        }
+
         return (
             <div className={style.section}>
                 <h2>COLORS</h2>

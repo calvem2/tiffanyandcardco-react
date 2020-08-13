@@ -5,7 +5,7 @@ import customCard from "src/images/doggy.png";
 class OrderReview extends Component {
     // props:
     // currentStep: current step in multi-form
-    // selections: choices selected
+    // designChoices: choices selected
     // email: initial display value for email input
     // insta: initial display value for Instagram input
     // handleChange: event handler for change to form
@@ -37,18 +37,29 @@ class OrderReview extends Component {
     }
 
     makeSections = () => {
-        // if this is custom card form, set selections to custom card image
-        let selections = this.props.formType === "custom" ? [{customCard}] : this.props.selections;
+        // return design info for custom card
+        if (this.props.formType === "custom") {
+            return (
+                <div className={style.product}>
+                    <img src={customCard}/>
+                    {/*<div className={style["product-info"]}>*/}
+                    {/*    <p>quantity: {info["quantity"]}</p>*/}
+                    {/*    <p>notes: {info["notes"]}</p>*/}
+                    {/*</div>*/}
+                </div>
+            );
+        }
 
         // create section for each selection
+        let selections = this.props.designChoices;
         let sections = [];
-        for (let [id, info] of selections) {
+        for (let product in selections) {
             sections.push(
                 <div className={style.product}>
-                    <img src={id}/>
+                    <img src={product}/>
                     <div className={style["product-info"]}>
-                        <p>quantity: {info["quantity"]}</p>
-                        <p>notes: {info["notes"]}</p>
+                        <p>quantity: {selections[product]["quantity"]}</p>
+                        <p>notes: {selections[product]["notes"]}</p>
                     </div>
                 </div>
             )

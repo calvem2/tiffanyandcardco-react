@@ -7,8 +7,8 @@ import customCard from "../images/doggy.png";
 class CheckOut extends Component {
     // props
     // currentStep: current step in multi-form
-    // formType: type of form (inventory, custom, ready-made)
-    // selections: choices selected
+    // formType: type of form (inventory, custom, cards)
+    // designChoices: choices selected
     // handleChange: event handler for change to form
 
     /**
@@ -16,42 +16,62 @@ class CheckOut extends Component {
      * Change the selection's infoType (quantity or notes) to the new value
      */
     handleInfoChange = (infoType, id, newValue) => {
-        let selections = this.props.selections;
+        let selections = this.props.designChoices;
         if (infoType === "quantity") {
-            selections.get(id)["quantity"] = newValue;
+            selections[id]["quantity"] = newValue;
         } else {
-            selections.get(id)["notes"] = newValue;
+            selections[id]["notes"] = newValue;
         }
 
         this.props.handleChange({selections: selections});
     }
 
     /**
-     * Produce quantity and notes section for each of user's this.props.selections
+     * Produce quantity and notes section for each of user's this.props.designChoices
      */
     makeSections = () => {
-        // if this is custom card form, set selections to custom card image
-        let selections = this.props.formType === "custom" ? [{customCard}] : this.props.selections;
-
+        // return design info for custom card
+        // if (this.props.formType === "custom") {
+        //     return (
+        //         <div className={style.product}>
+        //             <img src={customCard}/>
+        //             <div className={style["product-info"]}>
+        //                 <Quantity
+        //                     id={product}
+        //                     quantity={selections[product]["quantity"]}
+        //                     onChange={this.handleInfoChange}
+        //                 />
+        //                 <Notes
+        //                     id={product}
+        //                     note={selections[product]["notes"]}
+        //                     formType={this.props.formType}
+        //                     onChange={this.handleInfoChange}
+        //                 />
+        //             </div>
+        //         </div>
+        //     );
+        // }
         // create section for each selection
+        let selections = this.props.designChoices;
         let sections = [];
-        for (let [id, info] of selections) {
+        for (let product in selections) {
+            let src = product === "custom" ? customCard : product;
             sections.push(
                 <div className={style.product}>
-                    <img src={id}/>
+                    <img src={src}/>
+                    {/* add description if this is custom product*/}
                     <div className={style["product-info"]}>
                         <Quantity
-                            id={id}
-                            quantity={info["quantity"]}
+                            id={product}
+                            quantity={selections[product]["quantity"]}
                             onChange={this.handleInfoChange}
                         />
-                        {/*// todo: change back to inventory*/}
-                        {this.props.formType !== "" &&
                         <Notes
-                            id={id}
-                            note={info["notes"]}
+                            id={product}
+                            note={selections[product]["notes"]}
+                            formType={this.props.formType}
                             onChange={this.handleInfoChange}
-                        />}
+                        />
                     </div>
                 </div>
             )
