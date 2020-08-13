@@ -22,7 +22,7 @@ class Menu extends Component {
                    className={this.props.selected === "gallery" ? style.selected : style.unselected}>
                     GALLERY
                 </a>
-                <a href="./inventory.html"
+                <a href="./request.html"
                    className={this.props.selected === "request" ? style.selected : style.unselected}>
                     REQUEST
                 </a>

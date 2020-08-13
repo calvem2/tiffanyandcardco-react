@@ -14,12 +14,15 @@ class Form extends Component {
     // props
     // formType: form type (inventory, choose from design, start from scratch)
 
+    // props:
+    // products:
+
     constructor(props) {
         super(props);
         this.state = {
             formType: "inventory",
             currentStep: 0,                 // current step in the form
-            designChoices: new Map(),       // user design selections; id mapped to quantity and notes
+            designChoices: {},              // user design selections; id mapped to quantity and notes
             email: "",                      // user email address
             insta: ""                       // user instagram handle
         };
@@ -37,7 +40,7 @@ class Form extends Component {
      */
     validateInput = () => {
         if (this.state.currentStep === 1) {
-            return this.state.designChoices.size !== 0;
+            return Object.keys(this.state.designChoices).length !== 0;
         } else if (this.state.currentStep === 3) {
             return this.state.email !== "" || this.state.insta !== "";
         }
@@ -167,10 +170,10 @@ class Form extends Component {
             requestInfo += "Email: " + this.state.email + '\n';
             requestInfo += "Instagram: " + this.state.insta + '\n';
             requestInfo += "Selections: " + '\n';
-            for (let [id, info] of this.state.designChoices) {
-                requestInfo += "url: " + id + '\n';
-                requestInfo += "quantity: " + info["quantity"] + '\n';
-                requestInfo += "notes: " + info["notes"] + '\n\n';
+            for (let product in this.state.designChoices) {
+                requestInfo += "url: " + product + '\n';
+                requestInfo += "quantity: " + this.state.designChoices[product]["quantity"] + '\n';
+                requestInfo += "notes: " + this.state.designChoices[product]["notes"] + '\n\n';
             }
 
             // send request email
@@ -216,18 +219,18 @@ class Form extends Component {
                 <DesignChooser
                     currentStep={this.state.currentStep}
                     formType={this.state.formType}
-                    selections={this.state.designChoices}
+                    designChoices={this.state.designChoices}
                     handleChange={this.handleChange}
                 />
                 <CheckOut
                     currentStep={this.state.currentStep}
                     formType={this.state.formType}
-                    selections={this.state.designChoices}
+                    designChoices={this.state.designChoices}
                     handleChange={this.handleChange}
                 />
                 <OrderReview
                     currentStep={this.state.currentStep}
-                    selections={this.state.designChoices}
+                    designChoices={this.state.designChoices}
                     email={this.state.email}
                     insta={this.state.insta}
                     handleChange={this.handleChange}
