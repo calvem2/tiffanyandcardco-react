@@ -1,14 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
 
 /* FORM */
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+h1, h2 {
     text-align: center;
 }
 /* style form title */
 h1 {
+    font-family: 'Playfair Display', serif;
     font-weight: 400;
     color: #09486B;
+}
+
+/* style form section titles (for custom card request form) */
+h2 {
+    font-family: "Mulish", sans-serif;
+    font-weight: 600;
+    color: rgb(172, 217, 198);
 }
 
 form {
@@ -91,8 +98,6 @@ form {
 }
 
 
-/* style form section titles */
-
 /* START PAGE */
 #start {
     position: relative;
@@ -168,13 +173,49 @@ form {
     cursor: pointer;
 }
 
+/* MENU */
+#form-menu {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
 
+#form-menu * {
+    display: inline-block;
+    border: solid 2px #FE9898;
+    padding: 5px 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#form-menu .selected {
+    color: white;
+    background-color: #FE9898;
+}
+
+#form-menu .unselected {
+    color: dimgrey;
+}
+
+#form-menu p:first-child {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+#form-menu p:nth-child(2) {
+
+}
+
+#form-menu p:nth-child(3) {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
 /* DESIGN CHOOSER*/
 
 /* style category titles */
 h3 {
     font-size: 14pt;
-    /*margin-left: 50px;*/
+    margin-left: 50px;
     color: #BABEBF;
 }
 
@@ -225,6 +266,15 @@ input[type="checkbox"] {
     transform: scale(0.95);
     /* box-shadow: 0 0 5px #333; */
     z-index: -1;
+}
+
+/* COLOR CHOOSER */
+input[type="color"] {
+    /*border: 3px solid black;*/
+    height: 100px;
+    width: 250px;
+
+    background: none;
 }
 
 /* CHECK OUT */
@@ -297,6 +347,7 @@ textarea {
 textarea::placeholder, input::placeholder {
     font-family: "Mulish", sans-serif;
     font-size: 12pt;
+    color: #BABEBF;
     /*border: 3px solid yellow;*/
     /*line-height: 250px;*/
     /*vertical-align: top;*/
@@ -321,7 +372,8 @@ select:focus, textarea:focus, input:focus {
 }
 
 /* style intro text */
-#review-msg {
+.greeting-msg {
+    font-size: 12.5pt;
     display: block;
     color: #FE9898;
     text-align: center;
