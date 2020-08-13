@@ -5,16 +5,19 @@ import style from "./Form.css"
 import startImage from "../images/request_start.jpg";
 import classNames from 'classnames/bind';
 import OrderReview from "components/OrderReview";
+import FormMenu from "components/FormMemu";
 
 const cx = classNames.bind(style);
 
 class Form extends Component {
+    // TODO: get rid of this prop everywhere
     // props
     // formType: form type (inventory, choose from design, start from scratch)
 
     constructor(props) {
         super(props);
         this.state = {
+            formType: "inventory",
             currentStep: 0,                 // current step in the form
             designChoices: new Map(),       // user design selections; id mapped to quantity and notes
             email: "",                      // user email address
@@ -200,16 +203,25 @@ class Form extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.startScreen()}
+
+                {this.state.currentStep === 1 &&
+                <FormMenu
+                    formType={this.state.formType}
+                    handleChange={this.handleChange}
+                />
+                }
+
                 {this.stepTitle()}
+
                 <DesignChooser
                     currentStep={this.state.currentStep}
-                    formType={this.props.formType}
+                    formType={this.state.formType}
                     selections={this.state.designChoices}
                     handleChange={this.handleChange}
                 />
                 <CheckOut
                     currentStep={this.state.currentStep}
-                    formType={this.props.formType}
+                    formType={this.state.formType}
                     selections={this.state.designChoices}
                     handleChange={this.handleChange}
                 />
