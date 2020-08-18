@@ -158,7 +158,23 @@ class DesignChooser extends Component {
         return (
             <div className={style.section}>
                 <h2>COLORS</h2>
-                <input type="color" value="#e66465" onChange={this.onColorChange}/>
+                <div id={style["color-choosers"]}>
+                    <CirclePicker
+                        className={style["color-input"]}
+                        color={this.props.designChoices["custom"]["colors"][0]}
+                        onChangeComplete={this.onColorChange(0)}
+                    />
+                    <CirclePicker
+                        className={style["color-input"]}
+                        color={this.props.designChoices["custom"]["colors"][1]}
+                        onChangeComplete={this.onColorChange(1)}
+                    />
+                    <CirclePicker
+                        className={style["color-input"]}
+                        color={this.props.designChoices["custom"]["colors"][2]}
+                        onChangeComplete={this.onColorChange(2)}
+                    />
+                </div>
             </div>
         );
     };
@@ -166,8 +182,12 @@ class DesignChooser extends Component {
     /**
      * Handles change to color choosers
      */
-    onColorChange = (event) => {
-        console.log(event.target.value);s
+    onColorChange = (index) => (color) => {
+        console.log(index);
+        console.log(color);
+        let designChoices = this.props.designChoices;
+        designChoices["custom"]["colors"][index] = color.hex;
+        this.props.handleChange({designChoices: designChoices})
     };
 
     /**
