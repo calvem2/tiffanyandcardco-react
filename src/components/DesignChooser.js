@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CirclePicker } from 'react-color';
 import style from "./Form.css"
 
 const MAX_SELECTIONS = 3; // max number of choice selections allowed
@@ -72,6 +73,7 @@ class DesignChooser extends Component {
      */
     handleCheckboxChange = (event) => {
         let selections = this.props.designChoices;
+        // remove design choice if it was unchecked; otherwise add it if room for more selections
         if (!event.target.checked) {
             if (this.props.formType !== "custom") {
                 delete selections[event.target.id];
@@ -79,16 +81,13 @@ class DesignChooser extends Component {
                 selections["custom"]["stamps"].splice(selections["custom"]["stamps"].indexOf(event.target.id), 1);
             }
             // TODO: change to check case for custom and less than max and not custom and less than
-        } else if (Object.keys(selections).length < MAX_SELECTIONS) {
-            // update appropriate data for custom card or inventory/from existing
-            if (this.props.formType !== "custom") {
-                selections[event.target.id] = {quantity: 1, notes: ""};
-            } else {
-                let stampSelections = selections.hasOwnProperty("custom") ? selections["custom"]["stamps"] : [];
-                // TODO: consider formatting google drive description as url,category;stamp-set-name
-                stampSelections.push(event.target.id);
-                selections["custom"] = {quantity: 1, notes: "", stamps: stampSelections, colors: [], occasion: ""};
-            }
+        } else if (this.props.formType !== "custom" && Object.keys(selections).length < MAX_SELECTIONS) {
+            // update appropriate data for inventory/from existing
+            selections[event.target.id] = {quantity: 1, notes: ""};
+            event.target.checked = true;
+        } else if (this.props.formType === "custom" && selections["custom"]["stamps"].length < MAX_SELECTIONS) {
+            // update appropriate data for custom card
+            selections["custom"]["stamps"].push(event.target.id);
             event.target.checked = true;
         } else {
             event.target.checked = false;
