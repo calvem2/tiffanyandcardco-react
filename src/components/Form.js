@@ -40,6 +40,7 @@ class Form extends Component {
      */
     validateInput = () => {
         if (this.state.currentStep === 1) {
+            //TODO: add validation for custom step one
             return Object.keys(this.state.designChoices).length !== 0;
         } else if (this.state.currentStep === 3) {
             return this.state.email !== "" || this.state.insta !== "";
