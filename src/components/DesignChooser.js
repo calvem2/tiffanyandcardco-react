@@ -29,7 +29,7 @@ class DesignChooser extends Component {
         } else if (this.props.formType === "inventory") {
             images = this.importAll(require.context('../card_images/inventory', false, /\.txt$/));
         }
-        console.log(images);
+        // console.log(images[0]['default'].split('\n').filter(x => x));
         return images[0]['default'].split('\n').filter(x => x);
     };
 
@@ -39,18 +39,26 @@ class DesignChooser extends Component {
     makeCheckboxes = (images) => {
         let choices = [];
         for (let imgInfo of images) {
+            // console.log(imgInfo);
             let src = imgInfo.split(",")[0];
+            // let id = src;
+            // set id to stamp set name for custom; img src otherwise
+            let id = this.props.formType === "custom" ? imgInfo.split(",")[1].split(";")[1] : src;
+
+            // let id = this.props.formType === "custom" ? imgInfo.split(",")[1].split(";")[1].replace(/ /g, "") : src;
+            // console.log(id);
             // Check to see if card image or stamp image for custom card has been checked
-            let checked = this.props.designChoices.hasOwnProperty(src) ||
-                (this.props.designChoices.hasOwnProperty("custom") && this.props.designChoices["custom"]["stamps"].includes(src));
+            // let checked = this.props.designChoices.hasOwnProperty(src) ||
+            //     (this.props.designChoices.hasOwnProperty("custom") && this.props.designChoices["custom"]["stamps"].includes(id));
             choices.push(
                 <li>
                     <input
                         type="checkbox"
-                        id={src} onChange={this.handleCheckboxChange}
-                        checked={checked}
+                        onChange={this.handleCheckboxChange}
+                        id={id}
+                        // checked={false}
                     />
-                    <label htmlFor={src} className={style["design-choice"]}>
+                    <label htmlFor={id} className={style["design-choice"]}>
                         <img src={src}/>
                     </label>
                 </li>
@@ -70,12 +78,14 @@ class DesignChooser extends Component {
             } else {
                 selections["custom"]["stamps"].splice(selections["custom"]["stamps"].indexOf(event.target.id), 1);
             }
+            // TODO: change to check case for custom and less than max and not custom and less than
         } else if (Object.keys(selections).length < MAX_SELECTIONS) {
             // update appropriate data for custom card or inventory/from existing
             if (this.props.formType !== "custom") {
                 selections[event.target.id] = {quantity: 1, notes: ""};
             } else {
                 let stampSelections = selections.hasOwnProperty("custom") ? selections["custom"]["stamps"] : [];
+                // TODO: consider formatting google drive description as url,category;stamp-set-name
                 stampSelections.push(event.target.id);
                 selections["custom"] = {quantity: 1, notes: "", stamps: stampSelections, colors: [], occasion: ""};
             }
@@ -110,7 +120,7 @@ class DesignChooser extends Component {
         let images = this.getGoogleImages();
         for (let imgInfo of images) {
             // TODO: you'll have to change this (split on ; too) if you add stamp set names
-            let category = imgInfo.split(",")[1];
+            let category = imgInfo.split(",")[1].split(";")[0];
             if (!stamps.hasOwnProperty(category)) {
                 stamps[category] = [];
             }
@@ -149,10 +159,17 @@ class DesignChooser extends Component {
         return (
             <div className={style.section}>
                 <h2>COLORS</h2>
-                <input type="color" value="#e66465"/>
+                <input type="color" value="#e66465" onChange={this.onColorChange}/>
             </div>
         );
-    }
+    };
+
+    /**
+     * Handles change to color choosers
+     */
+    onColorChange = (event) => {
+        console.log(event.target.value);s
+    };
 
     /**
      * Render short intro message
