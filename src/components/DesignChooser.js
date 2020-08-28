@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { CirclePicker } from 'react-color';
+import { SwatchesPicker } from 'react-color';
 import style from "./Form.css"
+import ColorPicker from "components/ColorPicker";
 
 const MAX_SELECTIONS = 3; // max number of choice selections allowed
 
@@ -73,7 +74,7 @@ class DesignChooser extends Component {
      */
     handleCheckboxChange = (event) => {
         let selections = this.props.designChoices;
-        // remove design choice if it was unchecked; otherwise add it if room for more selections
+        // remove design choice if it was unchecked by user; otherwise add it if room for more selections
         if (!event.target.checked) {
             if (this.props.formType !== "custom") {
                 delete selections[event.target.id];
@@ -159,20 +160,9 @@ class DesignChooser extends Component {
             <div className={style.section}>
                 <h2>COLORS</h2>
                 <div id={style["color-choosers"]}>
-                    <CirclePicker
-                        className={style["color-input"]}
-                        color={this.props.designChoices["custom"]["colors"][0]}
-                        onChangeComplete={this.onColorChange(0)}
-                    />
-                    <CirclePicker
-                        className={style["color-input"]}
-                        color={this.props.designChoices["custom"]["colors"][1]}
-                        onChangeComplete={this.onColorChange(1)}
-                    />
-                    <CirclePicker
-                        className={style["color-input"]}
-                        color={this.props.designChoices["custom"]["colors"][2]}
-                        onChangeComplete={this.onColorChange(2)}
+                    <ColorPicker
+                        handleChange={this.onColorChange}
+                        selectable={this.props.designChoices["custom"]["colors"].length < MAX_SELECTIONS}
                     />
                 </div>
             </div>
@@ -180,13 +170,15 @@ class DesignChooser extends Component {
     };
 
     /**
-     * Handles change to color choosers
+     * Handles change to color chooser: removes color if it already exists in design choices; adds otherwise
      */
-    onColorChange = (index) => (color) => {
-        console.log(index);
-        console.log(color);
+    onColorChange = (color) => {
         let designChoices = this.props.designChoices;
-        designChoices["custom"]["colors"][index] = color.hex;
+        if (designChoices["custom"]["colors"].includes(color)) {
+            designChoices["custom"]["colors"].splice(designChoices["custom"]["colors"].indexOf(color), 1);
+        } else {
+            designChoices["custom"]["colors"].push(color);
+        }
         this.props.handleChange({designChoices: designChoices})
     };
 
