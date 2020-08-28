@@ -33,7 +33,7 @@ class FormMenu extends Component {
                 quantity: 1,
                 notes: "",
                 stamps: [],
-                colors: ["transparent", "#FFFFFF", "#FFFFFF"],
+                colors: [],
                 occasion: ""
             }
         }

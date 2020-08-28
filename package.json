@@ -26,9 +26,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "classnames": "^2.2.6",
     "react": "^16.13.1",
-    "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "underscore": "^1.10.2"
   }
