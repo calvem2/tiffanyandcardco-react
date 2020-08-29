@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import style from "./Form.css";
-import customCard from "src/images/doggy.png";
+import customCard from "../images/doggy.png";
 
 class OrderReview extends Component {
     // props:
     // currentStep: current step in multi-form
+    // formType: type of form (inventory, custom, cards)
     // designChoices: choices selected
     // email: initial display value for email input
     // insta: initial display value for Instagram input
@@ -39,13 +40,15 @@ class OrderReview extends Component {
     makeSections = () => {
         // return design info for custom card
         if (this.props.formType === "custom") {
+            let design = this.props.designChoices["custom"];
             return (
                 <div className={style.product}>
                     <img src={customCard}/>
-                    {/*<div className={style["product-info"]}>*/}
-                    {/*    <p>quantity: {info["quantity"]}</p>*/}
-                    {/*    <p>notes: {info["notes"]}</p>*/}
-                    {/*</div>*/}
+                    <div className={style["product-info"]}>
+                        {this.description()}
+                        <p>quantity: {design["quantity"]}</p>
+                        <p>notes: {design["notes"]}</p>
+                    </div>
                 </div>
             );
         }
@@ -66,14 +69,27 @@ class OrderReview extends Component {
         }
 
         return sections;
-    }
+    };
+
+    /**
+     * Render description for card
+     */
+    description = () => {
+        let design = this.props.designChoices["custom"];
+        return (
+            <div id={style.description}>
+                <p>occasion: {design["occasion"]}</p>
+                <p>stamps: {design["stamps"].toString().replace(/,/g, ", ")}</p>
+            </div>
+        );
+    };
 
     /**
      * Render contact info input (or summary if form has been submitted)
      */
     contactInfo = () => {
         let currentStep = this.props.currentStep;
-        let readOnly = currentStep === 3 ? false : true;
+        let readOnly = currentStep !== 3;
         let emailPlaceholder = currentStep === 3 ? "email@address.com" : "";
         let instaPlaceholder = currentStep === 3 ? "@instagram" : "";
         return (

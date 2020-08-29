@@ -5,7 +5,7 @@ import style from "./Form.css"
 import startImage from "../images/request_start.jpg";
 import classNames from 'classnames/bind';
 import OrderReview from "components/OrderReview";
-import FormMenu from "components/FormMemu";
+import FormMenu from "components/FormMenu";
 
 const cx = classNames.bind(style);
 
@@ -41,6 +41,10 @@ class Form extends Component {
     validateInput = () => {
         if (this.state.currentStep === 1) {
             //TODO: add validation for custom step one
+            if (this.state.formType === "custom") {
+                return this.state.designChoices["custom"]["stamps"].length !== 0 &&
+                       this.state.designChoices["custom"]["colors"].length !== 0;
+            }
             return Object.keys(this.state.designChoices).length !== 0;
         } else if (this.state.currentStep === 3) {
             return this.state.email !== "" || this.state.insta !== "";
@@ -96,7 +100,7 @@ class Form extends Component {
 
 
     /**
-     * Renders next button if there is a previous form section
+     * Renders next button if there is a next form section
      */
     nextButton = () => {
         let currentStep = this.state.currentStep;
@@ -231,6 +235,7 @@ class Form extends Component {
                 />
                 <OrderReview
                     currentStep={this.state.currentStep}
+                    formType={this.state.formType}
                     designChoices={this.state.designChoices}
                     email={this.state.email}
                     insta={this.state.insta}
