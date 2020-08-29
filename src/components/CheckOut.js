@@ -27,30 +27,25 @@ class CheckOut extends Component {
     }
 
     /**
+     * Render description for card
+     */
+    description = () => {
+        if (this.props.formType !== "custom") {
+            return null;
+        }
+        let design = this.props.designChoices["custom"];
+        return (
+            <div id={style.description}>
+                <p>occasion: {design["occasion"]}</p>
+                <p>stamps: {design["stamps"].toString().replace(/,/g, ", ")}</p>
+            </div>
+        );
+    };
+
+    /**
      * Produce quantity and notes section for each of user's this.props.designChoices
      */
     makeSections = () => {
-        // return design info for custom card
-        // if (this.props.formType === "custom") {
-        //     return (
-        //         <div className={style.product}>
-        //             <img src={customCard}/>
-        //             <div className={style["product-info"]}>
-        //                 <Quantity
-        //                     id={product}
-        //                     quantity={selections[product]["quantity"]}
-        //                     onChange={this.handleInfoChange}
-        //                 />
-        //                 <Notes
-        //                     id={product}
-        //                     note={selections[product]["notes"]}
-        //                     formType={this.props.formType}
-        //                     onChange={this.handleInfoChange}
-        //                 />
-        //             </div>
-        //         </div>
-        //     );
-        // }
         // create section for each selection
         let selections = this.props.designChoices;
         let sections = [];
@@ -61,6 +56,7 @@ class CheckOut extends Component {
                     <img src={src}/>
                     {/* add description if this is custom product*/}
                     <div className={style["product-info"]}>
+                        {this.description()}
                         <Quantity
                             id={product}
                             quantity={selections[product]["quantity"]}

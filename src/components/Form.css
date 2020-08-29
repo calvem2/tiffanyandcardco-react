@@ -322,6 +322,12 @@ input[type="checkbox"] {
 
     /*padding: 5px;*/
     /*font-family: 'Playfair Display', serif;*/
+    color: black;
+}
+
+/* style custom card summary description*/
+.description p {
+    color: black;
 }
 
 /* style product images */
@@ -343,6 +349,7 @@ input[type="checkbox"] {
     width: 125px;
     font-size: 12pt;
     /*margin: 5px;*/
+    /*color: dimgrey;*/
 }
 
 .quantity select {
@@ -387,7 +394,7 @@ select:focus, textarea:focus, input:focus {
     margin: auto;
 }
 /* style product info text */
-.product p {
+img + .product p {
     color: dimgrey;
 }
 

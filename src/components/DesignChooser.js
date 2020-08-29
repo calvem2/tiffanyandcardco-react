@@ -97,10 +97,10 @@ class DesignChooser extends Component {
     };
 
     /**
-     * Render design options
+     * Render design options (cards or stamps)
      */
     designOptions = () => {
-        // render on section for card images if not custom request form
+        // render one section for card images if not custom request form
         if (this.props.formType !== "custom") {
             let checkboxes = this.makeCheckboxes(this.getGoogleImages());
             return (
