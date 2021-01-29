@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* FORM */
 h1, h2 {
@@ -13,7 +14,7 @@ h1 {
 
 /* style form section titles (for custom card request form) */
 h2 {
-    font-family: "Mulish", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 600;
     color: rgb(172, 217, 198);
 }
@@ -22,7 +23,7 @@ form {
     /*border: 3px solid pink;*/
 }
 .form-group {
-    font-family: "Mulish", sans-serif;
+    font-family: "Montserrat", sans-serif;
     /*padding-bottom: 35px;*/
     /*border: 3px solid blue;*/
     /*height: 100%;*/
@@ -47,7 +48,7 @@ form {
     background: none;
     border: none;
     cursor: pointer;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 12pt;
     font-weight: bold;
     color: #09486B;
@@ -58,11 +59,11 @@ form {
 
 .nav-btn:focus {
     outline: none;
-    /*border: 2px solid #FE9898;*/
+    /*border: 2px solid #fc9d9a;*/
 }
 
 .nav-btn.disabled {
-    color: #BABEBF;
+    color: #c5c6c7;
     cursor: default;
 }
 
@@ -88,8 +89,8 @@ form {
 }
 
 .submit.disabled {
-    /*color: #BABEBF;*/
-    background-color: #BABEBF;
+    /*color: #c5c6c7;*/
+    background-color: #c5c6c7;
     cursor: default;
 }
 
@@ -113,7 +114,7 @@ form {
     /*height: 500px;*/
     border-radius: 25px;
     /*padding: 5px;*/
-    /*border: 5px solid #FE9898;*/
+    /*border: 5px solid #fc9d9a;*/
 }
 
 /* style request info container */
@@ -147,7 +148,7 @@ form {
 
 /* style request info text */
 #start-info p {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', serif;
     text-align: center;
     font-size: 14pt;
 }
@@ -182,7 +183,7 @@ form {
 
 #form-menu * {
     display: inline-block;
-    border: solid 2px #FE9898;
+    border: solid 2px #fc9d9a;
     padding: 5px 40px;
     font-weight: bold;
     cursor: pointer;
@@ -190,7 +191,7 @@ form {
 
 #form-menu .selected {
     color: white;
-    background-color: #FE9898;
+    background-color: #fc9d9a;
 }
 
 #form-menu .unselected {
@@ -216,7 +217,7 @@ form {
 h3 {
     font-size: 14pt;
     margin-left: 50px;
-    color: #BABEBF;
+    color: #c5c6c7;
 }
 
 /* style category sections */
@@ -250,7 +251,7 @@ input[type="checkbox"] {
 
 /* style selected choices */
 :checked + .design-choice {
-    border-color: #FE9898;
+    border-color: #fc9d9a;
 }
 
 /* style choice images */
@@ -318,7 +319,7 @@ input[type="checkbox"] {
     height: 250px;
     width: 420px;
     /*border: 1px solid blue;*/
-    /*font-family: "Mulish", sans-serif;*/
+    /*font-family: "Montserrat", sans-serif;*/
     margin: 10px;
 
     /*padding: 5px;*/
@@ -374,9 +375,9 @@ textarea {
 }
 
 textarea::placeholder, input::placeholder {
-    font-family: "Mulish", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 12pt;
-    color: #BABEBF;
+    color: #c5c6c7;
     /*border: 3px solid yellow;*/
     /*line-height: 250px;*/
     /*vertical-align: top;*/
@@ -385,7 +386,7 @@ textarea::placeholder, input::placeholder {
 /* style inputs that have been clicked */
 select:focus, textarea:focus, input:focus {
     outline: none;
-    border: 2px solid #FE9898;
+    border: 2px solid #fc9d9a;
 }
 
 /* ORDER REVIEW */
@@ -404,7 +405,7 @@ img + .product p {
 .greeting-msg {
     font-size: 12.5pt;
     display: block;
-    color: #FE9898;
+    color: #fc9d9a;
     text-align: center;
     width: 50%;
     margin: auto auto 25px;

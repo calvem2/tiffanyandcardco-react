@@ -8,7 +8,7 @@ class CategorySelector extends Component {
 
     handleCategoryChange = (event) => {
         this.props.onChange(event.target.value);
-    }
+    };
 
     render() {
         let buttons = [];
@@ -22,7 +22,7 @@ class CategorySelector extends Component {
                            onChange={this.handleCategoryChange}/>
                     {this.props.categories[i].replace(/_/g, " ")}
                 </label>
-            )
+            );
             buttons.push(
                 <br/>
             )

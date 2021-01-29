@@ -1,10 +1,10 @@
 /*TODO: standardize color formats*/
 
 @import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
-/*#gallery {*/
-/*    display: flex;*/
-/*    justify-content:center;*/
-/*}*/
+.gallery {
+    display: flex;
+    justify-content: space-around;
+}
 
 /* container for rows of images */
 #gallery-container {
@@ -67,7 +67,7 @@
     right: 0;
 
     /* text alignment */
-    text-align: center;
+    /*text-align: center;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,8 +76,9 @@
     background: rgba(255, 255, 255, 0.9);
     color: black;
     border: 10px solid rgba(172, 217, 198, .7);
-    font-family: 'Mulish', sans-serif;
-    font-style: italic;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    /*font-style: italic;*/
     font-size: 11pt;
 
     /* hover effect */
@@ -86,7 +87,11 @@
     transition: opacity .2s, visibility .2s;
 }
 
-.description p {
+.description ul {
+    /*margin: 0;*/
+    padding-left: 20px;
+}
+.description li {
     /*border: solid 2px red;*/
     margin: 5px;
 }
@@ -103,11 +108,11 @@
 /* Selector style */
 #category-selector {
     /*float: left;*/
-    width: 100px;
-    margin-left: 5px;
-    padding-right: 0px;
-    position: absolute;
-    left: 50px;
+    /*width: 100px;*/
+    /*margin-left: 5px;*/
+    /*padding-right: 50px;*/
+    /*position: absolute;*/
+    /*left: 50px;*/
 }
 
 #gallery-container, #category-selector {
@@ -124,14 +129,40 @@ input[type="radio"] {
 label {
     display: block;
     /*border: 3px solid blue;*/
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14pt;
     /*padding-bottom: 5px;*/
-}
-
-label.selected {
-    color: #FE9898;
+    cursor: pointer;
 }
 
 label.unselected {
-    color: #BABEBF;
+    color: #c5c6c7;
+}
+
+label.selected, label:hover {
+    color: #fc9d9a;
+}
+
+
+/* Loader */
+.loader {
+    /*color: red;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    /*width: 100px;*/
+    /*border: solid 2px blue;*/
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #fc9d9a;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0%  { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
