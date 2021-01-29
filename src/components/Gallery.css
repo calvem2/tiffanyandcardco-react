@@ -1,10 +1,17 @@
 /*TODO: standardize color formats*/
 
 @import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
+<<<<<<< HEAD
 /*#gallery {*/
 /*    display: flex;*/
 /*    justify-content:center;*/
 /*}*/
+=======
+.gallery {
+    display: flex;
+    justify-content: space-around;
+}
+>>>>>>> parent of 956b96a... Try to deploy.
 
 /* container for rows of images */
 #gallery-container {
