@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* FORM */
 h1, h2 {
@@ -13,7 +14,7 @@ h1 {
 
 /* style form section titles (for custom card request form) */
 h2 {
-    font-family: "Mulish", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 600;
     color: rgb(172, 217, 198);
 }
@@ -22,7 +23,7 @@ form {
     /*border: 3px solid pink;*/
 }
 .form-group {
-    font-family: "Mulish", sans-serif;
+    font-family: "Montserrat", sans-serif;
     /*padding-bottom: 35px;*/
     /*border: 3px solid blue;*/
     /*height: 100%;*/

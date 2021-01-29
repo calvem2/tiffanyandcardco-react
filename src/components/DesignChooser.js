@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SwatchesPicker } from 'react-color';
+// import { SwatchesPicker } from 'react-color';
 import style from "./Form.css"
 import ColorPicker from "components/ColorPicker";
 

@@ -14,11 +14,49 @@ class Gallery extends Component {
         };
     }
 
+    componentDidMount() {
+        // remove loader once gallery is loaded
+        // this.fakeRequest().then(() => {
+        //     const el = document.querySelector(".loader-container");
+        //     if (el) {
+        //
+        //         // el.remove();  // removing the spinner element
+        //         this.setState({ loading: false }); // showing the app
+        //     }
+        // });
+        setTimeout(function() {
+            document.getElementById("gallery-loader").style.display = "none";
+            document.getElementById(style['gallery-container']).style.display = "flex";
+        }, 500);
+        // console.log("set style to none")
+    }
+
+    componentDidUpdate() {
+        // remove loader once gallery is loaded
+        // this.fakeRequest().then(() => {
+        //     const el = document.querySelector(".loader-container");
+        //     if (el) {
+        //
+        //         // el.remove();  // removing the spinner element
+        //         this.setState({ loading: false }); // showing the app
+        //     }
+        // });
+        setTimeout(function() {
+            document.getElementById("gallery-loader").style.display = "none";
+            document.getElementById(style['gallery-container']).style.display = "flex";
+        }, 500);
+
+        // console.log("set style to none")
+    }
+
 
     /**
      * Update the selected category value
      */
     updateCategory = (newCategory) => {
+        document.getElementById("gallery-loader").style.display = "block";
+        document.getElementById(style['gallery-container']).style.display = "none";
+        console.log("set style to block")
         this.setState({
             category: newCategory
         });
@@ -29,7 +67,7 @@ class Gallery extends Component {
      */
     importAll = (r) => {
         return r.keys().map(r);
-    }
+    };
 
     getLocalImages = () => {
         // FOR LOCAL
@@ -43,7 +81,7 @@ class Gallery extends Component {
             imgs.push(<img src={module['default']}/>);
         }
         return imgs;
-    }
+    };
 
     /**
      * Load images from text files containing info about images stored on google drive
@@ -110,19 +148,19 @@ class Gallery extends Component {
             let descriptionText = imgInfo.split(",")[1].split(";");
             let description = [];
             for (let line of descriptionText) {
-                description.push(<p>{line}</p>)
+                description.push(<li>{line}</li>)
             }
             imgs.push(
                 <div className={style['img-container']}>
                     <img className={style['gallery-img']} src={src}/>
                     {this.state.category !== "home_page" &&
-                    <div className={style.description}>{description}</div>
+                    <div className={style.description}><ul>{description}</ul></div>
                     }
                 </div>
             );
         }
         return imgs;
-    }
+    };
 
     /**
      * Produces array of rows of images for gallery
@@ -172,13 +210,16 @@ class Gallery extends Component {
         // rows.push(<div className={style.row}>{lastRow}</div>);
 
         return rows;
-    }
+    };
 
 
     render() {
         let rows = this.makeGalleryRows(this.makeGalleryImgs());
         return (
-            <div>
+
+            <div className={style.gallery}>
+                <div id="gallery-loader" className={style.loader}></div>
+
                 {this.state.category !== "home_page" &&
                     <CategorySelector selected={this.state.category} categories={CATEGORIES} onChange={this.updateCategory}/>
                 }
