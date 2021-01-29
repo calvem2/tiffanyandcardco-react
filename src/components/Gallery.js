@@ -34,8 +34,8 @@ class Gallery extends Component {
     getLocalImages = () => {
         // FOR LOCAL
         const images = this.importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
-        console.log("these are the images");
-        console.log(images);
+        // console.log("these are the images");
+        // console.log(images);
         let imgs = [];
         for (let [index, module] of Object.entries(images)) {
             // console.log(index);

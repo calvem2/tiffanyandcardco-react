@@ -137,7 +137,7 @@ class OrderReview extends Component {
         }
         return (
             <div className={style["form-group"]}>
-                <p className={style["greeting-msg"]}>{this.greeting()}</p>
+                {/*<p className={style["greeting-msg"]}>{this.greeting()}</p>*/}
                 <div id={style["review-products"]}>
                     {this.makeSections()}
                 </div>
