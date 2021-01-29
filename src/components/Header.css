@@ -21,7 +21,7 @@
 /* Navigation bar*/
 #menu {
     overflow: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Mulish', sans-serif;
     font-size: 13px;
     text-align: center;
     padding: 10px;
@@ -45,7 +45,7 @@
 
 /* style selected menu item*/
 .selected {
-    color: #83af9b
+    color: #ACD9C6
 }
 
 /* style unselected menu items */
@@ -97,7 +97,7 @@
 
 /* Change menu item text color on hover */
 #menu a:hover, .dropdown:hover .dropbtn {
-    color: #83af9b;
+    color: #ACD9C6;
 }
 
 /* style container for instagram link*/
@@ -113,7 +113,7 @@
 
 /* change footer background color on hover */
 #footer:hover {
-    background-color: #83af9b;
+    background-color: #ACD9C6;
 }
 /* style instagram link*/
 #footer a {
