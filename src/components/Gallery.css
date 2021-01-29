@@ -1,6 +1,8 @@
 /*TODO: standardize color formats*/
 
 @import url('https://fonts.googleapis.com/css2?family=Mulish&family=Playfair+Display:ital@1&display=swap');
+
+/* pisition gallery and category selector*/
 .gallery {
     display: flex;
     justify-content: space-around;
