@@ -283,18 +283,19 @@ input[type="checkbox"] {
     /*border: 3px solid pink;*/
 }
 
-:checked + .swatch div:before {
+:checked + .swatch div:after {
     content: "✓";
     font-size: 16pt;
+    color: white;
 }
 
-:checked + .swatch .black:before {
+:checked + .swatch div.black-check:after {
     color: black;
 }
 
-:checked + .swatch .white:before {
-    color: white;
-}
+/*:checked + .swatch div.black-check:after {*/
+/*    color: blue;*/
+/*}*/
 
 
 /* CHECK OUT */
@@ -363,12 +364,13 @@ input[type="checkbox"] {
 textarea {
     /*border: 3px solid red;*/
     /*box-sizing: border-box;*/
+    margin-top: 10px;
     font-family: inherit;
     font-size: 12pt;
     border: 1px solid #ccc;
     border-radius: 4px;
-    height: 175px;
-    width: 400px;
+    height: 165px;
+    width: 350px;
 }
 
 textarea::placeholder, input::placeholder {

@@ -10,10 +10,6 @@ import FormMenu from "components/FormMenu";
 const cx = classNames.bind(style);
 
 class Form extends Component {
-    // TODO: get rid of this prop everywhere
-    // props
-    // formType: form type (inventory, choose from design, start from scratch)
-
     // props:
     // products:
 
@@ -207,7 +203,6 @@ class Form extends Component {
     }
 
     render() {
-    // TODO: decide what maxSelection is and pass to DesignChooser
         return (
             <form onSubmit={this.handleSubmit}>
                 {this.startScreen()}

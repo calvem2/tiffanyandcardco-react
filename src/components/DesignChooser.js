@@ -3,7 +3,7 @@ import { SwatchesPicker } from 'react-color';
 import style from "./Form.css"
 import ColorPicker from "components/ColorPicker";
 
-const MAX_SELECTIONS = 3; // max number of choice selections allowed
+const MAX_STAMPS = 3; // max number of stamp selections allowed for custom card
 
 class DesignChooser extends Component {
     // props
@@ -25,6 +25,7 @@ class DesignChooser extends Component {
     getGoogleImages = () => {
         let images;
         if (this.props.formType === "cards") {
+            //TODO: make seperate folder for this?
             images = this.importAll(require.context('../card_images/all', false, /\.txt$/));
         } else if (this.props.formType === "custom") {
             images = this.importAll(require.context('../card_images/stamps', false, /\.txt$/));
@@ -41,24 +42,22 @@ class DesignChooser extends Component {
     makeCheckboxes = (images) => {
         let choices = [];
         for (let imgInfo of images) {
-            // console.log(imgInfo);
             let src = imgInfo.split(",")[0];
-            // let id = src;
             // set id to stamp set name for custom; img src otherwise
             let id = this.props.formType === "custom" ? imgInfo.split(",")[1].split(";")[1] : src;
 
-            // let id = this.props.formType === "custom" ? imgInfo.split(",")[1].split(";")[1].replace(/ /g, "") : src;
-            // console.log(id);
             // Check to see if card image or stamp image for custom card has been checked
-            // let checked = this.props.designChoices.hasOwnProperty(src) ||
-            //     (this.props.designChoices.hasOwnProperty("custom") && this.props.designChoices["custom"]["stamps"].includes(id));
+            let checked = this.props.designChoices.hasOwnProperty(src) ||
+                (this.props.designChoices.hasOwnProperty("custom") && this.props.designChoices["custom"]["stamps"].includes(id));
+
+            // make checkbox for each choice
             choices.push(
                 <li>
                     <input
                         type="checkbox"
                         onChange={this.handleCheckboxChange}
                         id={id}
-                        // checked={false}
+                        checked={checked}
                     />
                     <label htmlFor={id} className={style["design-choice"]}>
                         <img src={src}/>
@@ -81,12 +80,11 @@ class DesignChooser extends Component {
             } else {
                 selections["custom"]["stamps"].splice(selections["custom"]["stamps"].indexOf(event.target.id), 1);
             }
-            // TODO: change to check case for custom and less than max and not custom and less than
-        } else if (this.props.formType !== "custom" && Object.keys(selections).length < MAX_SELECTIONS) {
+        } else if (this.props.formType !== "custom") {
             // update appropriate data for inventory/from existing
             selections[event.target.id] = {quantity: 1, notes: ""};
             event.target.checked = true;
-        } else if (this.props.formType === "custom" && selections["custom"]["stamps"].length < MAX_SELECTIONS) {
+        } else if (this.props.formType === "custom" && selections["custom"]["stamps"].length < MAX_STAMPS) {
             // update appropriate data for custom card
             selections["custom"]["stamps"].push(event.target.id);
             event.target.checked = true;
@@ -119,7 +117,6 @@ class DesignChooser extends Component {
         let stamps = {};
         let images = this.getGoogleImages();
         for (let imgInfo of images) {
-            // TODO: you'll have to change this (split on ; too) if you add stamp set names
             let category = imgInfo.split(",")[1].split(";")[0];
             if (!stamps.hasOwnProperty(category)) {
                 stamps[category] = [];
@@ -162,7 +159,8 @@ class DesignChooser extends Component {
                 <div id={style["color-choosers"]}>
                     <ColorPicker
                         handleChange={this.onColorChange}
-                        selectable={this.props.designChoices["custom"]["colors"].length < MAX_SELECTIONS}
+                        // selectable={this.props.designChoices["custom"]["colors"].length < MAX_SELECTIONS}
+                        selected={this.props.designChoices["custom"]["colors"]}
                     />
                 </div>
             </div>
@@ -204,7 +202,7 @@ class DesignChooser extends Component {
 
         return (
             <div className={style["form-group"]}>
-                {/*{this.greeting()}*/}
+                {this.greeting()}
                 {this.designOptions()}
                 {this.colorChooser()}
             </div>

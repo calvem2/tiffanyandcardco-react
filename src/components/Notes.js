@@ -5,6 +5,7 @@ class Notes extends Component {
     // props:
     // id: id of choice this note input corresponds to
     // note: initial display value for notes input
+    // formType: type of form (inventory, custom, cards)
     // handleChange: event handler for change to form
 
     constructor(props) {
@@ -24,12 +25,15 @@ class Notes extends Component {
     }
 
     render() {
+        let placeholder = this.props.formType === "cards"
+            ? "color preferences, tweaks, special instructions, etc."
+            : "additional notes...";
         return (
             <label>
                 <textarea
                     value={this.state.value}
                     onChange={this.onInputChange}
-                    placeholder="additional notes..."
+                    placeholder={placeholder}
                 />
             </label>
         );
