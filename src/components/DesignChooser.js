@@ -25,8 +25,8 @@ class DesignChooser extends Component {
     getGoogleImages = () => {
         let images;
         if (this.props.formType === "cards") {
-            // TODO: make seperate folder for this?
-            images = this.importAll(require.context('../card_images/all', false, /\.txt$/));
+            // TODO: make seperate folder for this? --> add occassion to info
+            images = this.importAll(require.context('../card_images/cards', false, /\.txt$/));
         } else if (this.props.formType === "custom") {
             images = this.importAll(require.context('../card_images/stamps', false, /\.txt$/));
         } else if (this.props.formType === "inventory") {
@@ -99,7 +99,8 @@ class DesignChooser extends Component {
      */
     designOptions = () => {
         // render one section for card images if not custom request form
-        if (this.props.formType !== "custom") {
+        // todo: update inventory in google drive with category in description, then delete this if
+        if (this.props.formType === "inventory") {
             let checkboxes = this.makeCheckboxes(this.getGoogleImages());
             return (
                 <div className={style["design-sections"]}>
@@ -112,26 +113,26 @@ class DesignChooser extends Component {
             );
         }
 
-        // render section for each category of stamps for custom request form
-        // sort stamp images into categories
-        let stamps = {};
+        // render section for each category of card/stamp for request form
+        // sort images into categories
+        let categories = {};
         let images = this.getGoogleImages();
         for (let imgInfo of images) {
             let category = imgInfo.split(",")[1].split(";")[0];
-            if (!stamps.hasOwnProperty(category)) {
-                stamps[category] = [];
+            if (!categories.hasOwnProperty(category)) {
+                categories[category] = [];
             }
-            stamps[category].push(imgInfo);
+            categories[category].push(imgInfo);
         }
 
         // get checkboxes for each category
         let sections = [];
-        for (let category in stamps) {
+        for (let category in categories) {
             sections.push(
                 <div className={style.section}>
                     <h3>{category}</h3>
                     <ul>
-                        {this.makeCheckboxes(stamps[category])}
+                        {this.makeCheckboxes(categories[category])}
                     </ul>
                 </div>
 
