@@ -25,7 +25,7 @@ class DesignChooser extends Component {
     getGoogleImages = () => {
         let images;
         if (this.props.formType === "cards") {
-            //TODO: make seperate folder for this?
+            // TODO: make seperate folder for this?
             images = this.importAll(require.context('../card_images/all', false, /\.txt$/));
         } else if (this.props.formType === "custom") {
             images = this.importAll(require.context('../card_images/stamps', false, /\.txt$/));

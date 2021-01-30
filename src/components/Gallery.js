@@ -130,14 +130,18 @@ class Gallery extends Component {
             let src = imgInfo.split(",")[0];
             let descriptionText = imgInfo.split(",")[1].split(";");
             let description = [];
-            for (let line of descriptionText) {
-                description.push(<li>{line}</li>)
+            // add bullet point for each element in description if it's not empty
+            if (descriptionText[0] !== "undefined") {
+                for (let line of descriptionText) {
+                    description.push(<li>{line}</li>)
+                }
             }
+
             imgs.push(
                 <div className={style['img-container']}>
                     <img className={style['gallery-img']} src={src}/>
                     {this.state.category !== "home_page" &&
-                    <div className={style.description}><ul>{description}</ul></div>
+                    <div className={description.length !== 0 ? style.description : style['empty-description']}><ul>{description}</ul></div>
                     }
                 </div>
             );

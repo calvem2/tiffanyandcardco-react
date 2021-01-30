@@ -169,8 +169,6 @@ class Form extends Component {
         if (this.validateInput()) {
             // construct request text
             let requestInfo = "";
-            // requestInfo += "Email: " + this.state.email + 'Char(10)';
-            // requestInfo += "Instagram: " + this.state.insta + '\r\n';
             requestInfo += "Selections (" + this.state.formType + "): ";
             for (let product in this.state.designChoices) {
                 requestInfo += "url: " + product + ' ';

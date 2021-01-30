@@ -63,7 +63,7 @@
 }
 
 /* descriptions for each individual image*/
-.description {
+.description, .empty-description {
     /* size*/
     width: 230px;
     height: 230px;
