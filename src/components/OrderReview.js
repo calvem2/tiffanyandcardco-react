@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import style from "./Form.css";
-import customCard from "../images/doggy.png";
+import customCard from "../images/custom_card.jpg";
 
 class OrderReview extends Component {
     // props:

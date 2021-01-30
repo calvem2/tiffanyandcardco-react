@@ -37,7 +37,6 @@ class Form extends Component {
      */
     validateInput = () => {
         if (this.state.currentStep === 1) {
-            //TODO: add validation for custom step one
             if (this.state.formType === "custom") {
                 return this.state.designChoices["custom"]["stamps"].length !== 0 //&&
                        // this.state.designChoices["custom"]["colors"].length !== 0;
@@ -45,9 +44,11 @@ class Form extends Component {
             return Object.keys(this.state.designChoices).length !== 0;
         } else if (this.state.currentStep === 3) {
             return this.state.email !== "" || this.state.insta !== "";
+        } else if (this.state.currentStep === 2 && this.state.formType === "custom") {
+            return this.state.designChoices["custom"]["occasion"] !== "";
         }
         return true;
-    }
+    };
 
     /**
      * Moves to next page in form

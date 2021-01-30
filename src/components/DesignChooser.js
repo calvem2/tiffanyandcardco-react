@@ -148,37 +148,37 @@ class DesignChooser extends Component {
     /**
      * Renders section for choosing color preferences
      */
-    colorChooser = () => {
-        if (this.props.formType !== "custom") {
-            return null;
-        }
-
-        return (
-            <div className={style.section}>
-                <h2>COLORS</h2>
-                <div id={style["color-choosers"]}>
-                    <ColorPicker
-                        handleChange={this.onColorChange}
-                        // selectable={this.props.designChoices["custom"]["colors"].length < MAX_SELECTIONS}
-                        selected={this.props.designChoices["custom"]["colors"]}
-                    />
-                </div>
-            </div>
-        );
-    };
+    // colorChooser = () => {
+    //     if (this.props.formType !== "custom") {
+    //         return null;
+    //     }
+    //
+    //     return (
+    //         <div className={style.section}>
+    //             <h2>COLORS</h2>
+    //             <div id={style["color-choosers"]}>
+    //                 <ColorPicker
+    //                     handleChange={this.onColorChange}
+    //                     // selectable={this.props.designChoices["custom"]["colors"].length < MAX_SELECTIONS}
+    //                     selected={this.props.designChoices["custom"]["colors"]}
+    //                 />
+    //             </div>
+    //         </div>
+    //     );
+    // };
 
     /**
      * Handles change to color chooser: removes color if it already exists in design choices; adds otherwise
      */
-    onColorChange = (color) => {
-        let designChoices = this.props.designChoices;
-        if (designChoices["custom"]["colors"].includes(color)) {
-            designChoices["custom"]["colors"].splice(designChoices["custom"]["colors"].indexOf(color), 1);
-        } else {
-            designChoices["custom"]["colors"].push(color);
-        }
-        this.props.handleChange({designChoices: designChoices})
-    };
+    // onColorChange = (color) => {
+    //     let designChoices = this.props.designChoices;
+    //     if (designChoices["custom"]["colors"].includes(color)) {
+    //         designChoices["custom"]["colors"].splice(designChoices["custom"]["colors"].indexOf(color), 1);
+    //     } else {
+    //         designChoices["custom"]["colors"].push(color);
+    //     }
+    //     this.props.handleChange({designChoices: designChoices})
+    // };
 
     /**
      * Render short intro message
