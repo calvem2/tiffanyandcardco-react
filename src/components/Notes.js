@@ -25,9 +25,14 @@ class Notes extends Component {
     }
 
     render() {
-        let placeholder = this.props.formType === "cards"
-            ? "color preferences, tweaks, special instructions, etc."
-            : "additional notes...";
+        let placeholder;
+        if (this.props.formType === "cards") {
+            placeholder = "color preferences, tweaks, special instructions, etc.";
+        } else if (this.props.formType === "inventory") {
+            placeholder = "additional notes...";
+        } else {
+            placeholder = "color, preferences, special instructions, additional notes, etc."
+        }
         return (
             <label>
                 <textarea

@@ -139,7 +139,7 @@ class DesignChooser extends Component {
         }
         return (
             <div className={style["design-sections"]}>
-                <h2>STAMPS</h2>
+                {/*<h2>STAMPS</h2>*/}
                 {sections}
             </div>
         );
@@ -188,8 +188,7 @@ class DesignChooser extends Component {
             return (
                 <p className={style["greeting-msg"]}>
                     Tell me a little bit about what you're looking for!
-                    Select some stamps you vibe with, choose your color color preferences, and
-                    I'll whip something up for you!
+                    Select some stamps you vibe with, and I'll whip something up for you!
                 </p>);
         }
         return null;
@@ -204,7 +203,7 @@ class DesignChooser extends Component {
             <div className={style["form-group"]}>
                 {this.greeting()}
                 {this.designOptions()}
-                {this.colorChooser()}
+                {/*{this.colorChooser()}*/}
             </div>
         );
 

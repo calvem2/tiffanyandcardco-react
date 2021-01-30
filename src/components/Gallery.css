@@ -141,7 +141,8 @@ label {
 }
 
 label.unselected {
-    color: #c5c6c7;
+    /*color: #c5c6c7;*/
+    color: #a9a9a9;
 }
 
 label.selected, label:hover {

@@ -38,8 +38,8 @@ class Form extends Component {
         if (this.state.currentStep === 1) {
             //TODO: add validation for custom step one
             if (this.state.formType === "custom") {
-                return this.state.designChoices["custom"]["stamps"].length !== 0 &&
-                       this.state.designChoices["custom"]["colors"].length !== 0;
+                return this.state.designChoices["custom"]["stamps"].length !== 0 //&&
+                       // this.state.designChoices["custom"]["colors"].length !== 0;
             }
             return Object.keys(this.state.designChoices).length !== 0;
         } else if (this.state.currentStep === 3) {
@@ -125,7 +125,7 @@ class Form extends Component {
         }
         let header = "step ".concat(this.state.currentStep).concat(": ");
         if (this.state.currentStep === 1) {
-            header = header.concat("choose your design(s)")
+            header = this.state.formType === "custom" ? header.concat("choose your stamps(s)") : header.concat("choose your design(s)");
         } else if (this.state.currentStep === 2) {
             header = header.concat("just a few more details");
         } else if (this.state.currentStep === 3) {
@@ -143,17 +143,17 @@ class Form extends Component {
         if (this.state.currentStep === 0) {
             return (
                 <div id={style.start}>
-                    <img src={startImage}/>
-                    <div id={style["start-info-container"]}>
+                    {/*<img src={startImage}/>*/}
+                    {/*<div id={style["start-info-container"]}>*/}
                         <div id={style["start-info"]}>
-                            <h1 id={style["request-header"]}>request</h1>
+                            {/*<h1 id={style["request-header"]}>request</h1>*/}
                             <p>
-                                Hello! I'd love to craft something up for you! Cards are $7 each.
+                                Hello! I'd love to craft something up for you.
                                 Tell me a little about your card needs and I'll be in touch!
                             </p>
                             <p id={style["start-button"]} onClick={this.next}>get started</p>
                         </div>
-                    </div>
+                    {/*</div>*/}
                 </div>
             );
         }
@@ -184,7 +184,7 @@ class Form extends Component {
                 currentStep: 4
             });
         }
-    }
+    };
     /**
      * Render submit button
      */

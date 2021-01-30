@@ -10,6 +10,7 @@ h1 {
     font-family: 'Playfair Display', serif;
     font-weight: 400;
     color: #09486B;
+    /*margin: 0;*/
 }
 
 /* style form section titles (for custom card request form) */
@@ -118,37 +119,39 @@ form {
 }
 
 /* style request info container */
-#start-info-container {
-    background-color: rgba(255, 255, 255, .8);
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    /*border: 5px solid rgba(254, 152, 152, .5);*/
-    border-radius: 25px;
+/*#start-info-container {*/
+/*    background-color: rgba(255, 255, 255, .8);*/
+/*    position: absolute;*/
+/*    top: 0px;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    !*border: 5px solid rgba(254, 152, 152, .5);*!*/
+/*    border-radius: 25px;*/
 
-}
+/*}*/
 
 /* style request info */
 #start-info {
-    background-color: rgba(254, 152, 152, .4);
-    border-radius: 15px;
-    width: 35%;
-    height: 35%;
+    /*background-color: rgba(254, 152, 152, .4);*/
+    border-radius: 10px;
+    background-color: rgba(252,157,154, .6);
+    width: 45%;
+    /*height: 35%;*/
     vertical-align: middle;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: 10px;
+    /*position: absolute;*/
+    margin: 85px auto 95px;
+    /*top: 0;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    padding: 20px;
     /*background-color: rgba(186, 190, 191, .6);*/
 }
 
 /* style request info text */
 #start-info p {
-    font-family: 'Playfair Display', serif;
+    /*font-family: 'Playfair Display', serif;*/
+    font-family: Montserrat, sans-serif;
     text-align: center;
     font-size: 14pt;
 }
@@ -170,7 +173,8 @@ form {
 }
 
 #start-button:hover {
-    color: #09486B;
+    /*background-color: #c5c6c7;*/
+    color: darkgrey;
     cursor: pointer;
 }
 
@@ -183,9 +187,11 @@ form {
 
 #form-menu * {
     display: inline-block;
-    border: solid 2px #FE9898;
-    padding: 5px 40px;
-    font-weight: bold;
+    /*border: solid 2px #FE9898;*/
+    border: 2px solid rgba(252, 157, 154, .6);
+    padding: 5px 20px;
+    margin: 5px;
+    /*font-weight: bold;*/
     cursor: pointer;
 }
 
@@ -198,19 +204,19 @@ form {
     color: dimgrey;
 }
 
-#form-menu p:first-child {
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-}
+/*#form-menu p:first-child {*/
+/*    border-top-left-radius: 30px;*/
+/*    border-bottom-left-radius: 30px;*/
+/*}*/
 
-#form-menu p:nth-child(2) {
+/*#form-menu p:nth-child(2) {*/
 
-}
+/*}*/
 
-#form-menu p:nth-child(3) {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-}
+/*#form-menu p:nth-child(3) {*/
+/*    border-top-right-radius: 30px;*/
+/*    border-bottom-right-radius: 30px;*/
+/*}*/
 /* DESIGN CHOOSER*/
 
 /* style category titles */
@@ -405,7 +411,8 @@ img + .product p {
 .greeting-msg {
     font-size: 12.5pt;
     display: block;
-    color: #FE9898;
+    /*color: darkgrey;*/
+    /*color: #FE9898;*/
     text-align: center;
     width: 50%;
     margin: auto auto 25px;
