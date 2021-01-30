@@ -10,11 +10,11 @@
 }
 
 /* container for rows of images */
-#gallery-container {
+.gallery-container {
     display: flex;
     flex-direction: column;
     /*justify-content: flex-start;*/
-    width: 75%;
+    /*width: 75%;*/
     /*margin-bottom: 25px;*/
     /*position: absolute;*/
     /*align-self: center;*/
@@ -28,8 +28,13 @@
     /*margin-right: 200px;*/
 }
 
+/* style gallery on gallery page */
+#gallery {
+    width: 75%;
+}
+
 /* rows of images */
-#gallery-container .row {
+.gallery-container .row {
     /*font-size: 30px;*/
     display: flex;
     flex-wrap: nowrap;

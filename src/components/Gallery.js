@@ -16,38 +16,19 @@ class Gallery extends Component {
     }
 
     componentDidMount() {
-        // remove loader once gallery is loaded
-        // this.fakeRequest().then(() => {
-        //     const el = document.querySelector(".loader-container");
-        //     if (el) {
-        //
-        //         // el.remove();  // removing the spinner element
-        //         this.setState({ loading: false }); // showing the app
-        //     }
-        // });
+        // clear loader
         setTimeout(function() {
             document.getElementById("loader-container").style.display = "none";
-            document.getElementById(style['gallery-container']).style.display = "flex";
+            document.getElementById(style['gallery']).style.display = "flex";
         }, 500);
-        // console.log("set style to none")
     }
 
     componentDidUpdate() {
-        // remove loader once gallery is loaded
-        // this.fakeRequest().then(() => {
-        //     const el = document.querySelector(".loader-container");
-        //     if (el) {
-        //
-        //         // el.remove();  // removing the spinner element
-        //         this.setState({ loading: false }); // showing the app
-        //     }
-        // });
+        // clear loader
         setTimeout(function() {
             document.getElementById("loader-container").style.display = "none";
-            document.getElementById(style['gallery-container']).style.display = "flex";
+            document.getElementById(style['gallery']).style.display = "flex";
         }, 500);
-
-        // console.log("set style to none")
     }
 
 
@@ -55,8 +36,9 @@ class Gallery extends Component {
      * Update the selected category value
      */
     updateCategory = (newCategory) => {
+        // display loader
         document.getElementById("loader-container").style.display = "block";
-        document.getElementById(style['gallery-container']).style.display = "none";
+        document.getElementById(style['gallery']).style.display = "none";
         console.log("set style to block")
         this.setState({
             category: newCategory
@@ -222,12 +204,14 @@ class Gallery extends Component {
                 {this.state.category !== "home_page" &&
                     <CategorySelector selected={this.state.category} categories={CATEGORIES} onChange={this.updateCategory}/>
                 }
-                <div id="loader-container" class={style["loader-container"]}>
+                <div id="loader-container" className={style["loader-container"]}>
                     <div className={style.loader}></div>
                 </div>
-                <div id={style['gallery-container']}>
+                <div className={style['gallery-container']} id={this.state.category === "home_page" ? style["home-gallery"] : style["gallery"]}>
                     {rows}
-                    <Footer/>
+                    {this.state.category !== "home_page" &&
+                        <Footer/>
+                    }
                 </div>
             </div>
         );
