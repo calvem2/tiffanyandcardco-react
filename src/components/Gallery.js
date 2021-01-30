@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CategorySelector from "./CategorySelector";
 import style from './Gallery.css';
 import * as _ from "underscore";
+import Footer from "components/Footer";
 
 const CATEGORIES = ["all", "birthday", "calendar", "congratulations", "get_well", "graduation",
                     "greeting", "holiday", "retirement", "thank_you", "wedding"];
@@ -25,7 +26,7 @@ class Gallery extends Component {
         //     }
         // });
         setTimeout(function() {
-            document.getElementById("gallery-loader").style.display = "none";
+            document.getElementById("loader-container").style.display = "none";
             document.getElementById(style['gallery-container']).style.display = "flex";
         }, 500);
         // console.log("set style to none")
@@ -42,7 +43,7 @@ class Gallery extends Component {
         //     }
         // });
         setTimeout(function() {
-            document.getElementById("gallery-loader").style.display = "none";
+            document.getElementById("loader-container").style.display = "none";
             document.getElementById(style['gallery-container']).style.display = "flex";
         }, 500);
 
@@ -54,7 +55,7 @@ class Gallery extends Component {
      * Update the selected category value
      */
     updateCategory = (newCategory) => {
-        document.getElementById("gallery-loader").style.display = "block";
+        document.getElementById("loader-container").style.display = "block";
         document.getElementById(style['gallery-container']).style.display = "none";
         console.log("set style to block")
         this.setState({
@@ -218,12 +219,16 @@ class Gallery extends Component {
         return (
 
             <div className={style.gallery}>
-                <div id="gallery-loader" className={style.loader}></div>
-
                 {this.state.category !== "home_page" &&
                     <CategorySelector selected={this.state.category} categories={CATEGORIES} onChange={this.updateCategory}/>
                 }
-                <div id={style['gallery-container']}>{rows}</div>
+                <div id="loader-container" class={style["loader-container"]}>
+                    <div className={style.loader}></div>
+                </div>
+                <div id={style['gallery-container']}>
+                    {rows}
+                    <Footer/>
+                </div>
             </div>
         );
     }

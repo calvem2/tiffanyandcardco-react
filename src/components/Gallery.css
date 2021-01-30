@@ -6,12 +6,15 @@
 .gallery {
     display: flex;
     justify-content: space-around;
+    align-items: flex-start;
 }
 
 /* container for rows of images */
 #gallery-container {
     display: flex;
     flex-direction: column;
+    /*justify-content: flex-start;*/
+    width: 75%;
     /*margin-bottom: 25px;*/
     /*position: absolute;*/
     /*align-self: center;*/
@@ -30,7 +33,7 @@
     /*font-size: 30px;*/
     display: flex;
     flex-wrap: nowrap;
-    margin: auto;
+    /*margin: auto;*/
 }
 
 /* containers for each individual image*/
@@ -153,7 +156,7 @@ label.selected, label:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: none;
+    /*display: none;*/
     /*width: 100px;*/
     /*border: solid 2px blue;*/
     border: 16px solid #f3f3f3;
@@ -162,6 +165,11 @@ label.selected, label:hover {
     width: 130px;
     height: 130px;
     animation: spin 2s linear infinite;
+}
+
+.loader-container {
+    width: 75%;
+    /*position: relative;*/
 }
 
 @keyframes spin {
