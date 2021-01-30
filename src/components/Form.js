@@ -6,6 +6,7 @@ import startImage from "../images/request_start.jpg";
 import classNames from 'classnames/bind';
 import OrderReview from "components/OrderReview";
 import FormMenu from "components/FormMenu";
+import * as emailjs from 'emailjs-com';
 
 const cx = classNames.bind(style);
 
@@ -168,16 +169,36 @@ class Form extends Component {
         if (this.validateInput()) {
             // construct request text
             let requestInfo = "";
-            requestInfo += "Email: " + this.state.email + '\n';
-            requestInfo += "Instagram: " + this.state.insta + '\n';
-            requestInfo += "Selections: " + '\n';
+            // requestInfo += "Email: " + this.state.email + 'Char(10)';
+            // requestInfo += "Instagram: " + this.state.insta + '\r\n';
+            requestInfo += "Selections (" + this.state.formType + "): ";
             for (let product in this.state.designChoices) {
-                requestInfo += "url: " + product + '\n';
-                requestInfo += "quantity: " + this.state.designChoices[product]["quantity"] + '\n';
-                requestInfo += "notes: " + this.state.designChoices[product]["notes"] + '\n\n';
+                requestInfo += "url: " + product + ' ';
+                requestInfo += "quantity: " + this.state.designChoices[product]["quantity"] + ' ';
+                requestInfo += "notes: " + this.state.designChoices[product]["notes"] + ' ';
             }
 
-            // send request email
+            // format email from form
+            // https://dashboard.emailjs.com/admin
+            // https://www.emailjs.com/docs/examples/reactjs/
+            // https://www.youtube.com/watch?v=NgWGllOjkbs
+
+            // add request info to form
+            let emailParams = event.target;
+            let requestInput = document.createElement("input");
+            requestInput.name = "message";
+            requestInput.type = "text";
+            requestInput.value = requestInfo;
+            requestInput.style.display = "none";
+            emailParams.appendChild(requestInput);
+
+            // send email
+            emailjs.sendForm('service_a23txfb', 'template_l9j9x0c', emailParams, 'user_Ru2L3oYAcRnZne1gtva11')
+                .then((result) => {
+                    console.log(result.text);
+                }, (error) => {
+                    console.log(error.text);
+                });
 
             // move to submitted page
             this.setState({

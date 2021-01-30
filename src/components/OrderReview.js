@@ -98,6 +98,7 @@ class OrderReview extends Component {
                     <label htmlFor="email">Email:</label>
                     <input
                         id="email"
+                        name="email"
                         type="text"
                         placeholder={emailPlaceholder}
                         value={this.state.email}
@@ -109,6 +110,7 @@ class OrderReview extends Component {
                     <label htmlFor="insta">Instagram:</label>
                     <input
                         id="insta"
+                        name="insta"
                         type="text"
                         placeholder={instaPlaceholder}
                         value={this.state.insta}
