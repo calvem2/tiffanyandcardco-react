@@ -38,7 +38,7 @@
 /* Links in the menu*/
 #menu a {
     /*float: left;*/
-    font-size: 16px;
+    font-size: 18px;
     /*color: black;*/
     padding: 14px 16px;
     text-decoration: none;
@@ -46,7 +46,8 @@
 
 /* style selected menu item*/
 .selected {
-    color: #83af9b
+    color: #83af9b;
+    /*font-weight: bold;*/
 }
 
 /* style unselected menu items */
@@ -55,50 +56,51 @@
 }
 
 /* The dropdown container */
-.dropdown {
+/*.dropdown {*/
     /*float: left;*/
     /*overflow: hidden;*/
     /*text-align: left;*/
-}
+/*}*/
 
 /* Dropdown button */
-.dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
-}
+/*.dropdown .dropbtn {*/
+/*    font-size: 16px;*/
+/*    border: none;*/
+/*    outline: none;*/
+/*    padding: 14px 16px;*/
+/*    background-color: inherit;*/
+/*    font-family: inherit; !* Important for vertical align on mobile phones *!*/
+/*    margin: 0; !* Important for vertical align on mobile phones *!*/
+/*}*/
 
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
+/*!* Dropdown content (hidden by default) *!*/
+/*.dropdown-content {*/
+/*    display: none;*/
+/*    position: absolute;*/
+/*    background-color: white;*/
+/*    min-width: 160px;*/
+/*    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+/*    z-index: 1;*/
+/*}*/
 
-/* Links inside the dropdown */
-.dropdown-content a {
-    clear: both;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
+/*!* Links inside the dropdown *!*/
+/*.dropdown-content a {*/
+/*    clear: both;*/
+/*    padding: 12px 16px;*/
+/*    text-decoration: none;*/
+/*    display: block;*/
+/*    text-align: left;*/
+/*}*/
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
+/*!* Show the dropdown menu on hover *!*/
+/*.dropdown:hover .dropdown-content {*/
+/*    display: block;*/
+/*}*/
 
 /* Change menu item text color on hover */
 #menu a:hover, .dropdown:hover .dropbtn {
     color: #83af9b;
+    /*font-weight: bold;*/
 }
 
 /* style container for instagram link*/

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import style from "./Form.css";
+import {CATEGORIES} from "components/utility";
 
 
 class Occasion extends Component {
@@ -24,10 +25,9 @@ class Occasion extends Component {
     };
 
     render() {
-        const categories = ["", "birthday", "congratulations", "get well", "graduation", "greeting", "holiday", "retirement", "thank you", "wedding", "other (specify in notes section)"];
-        const options = [];
-        for (let i = 0; i < categories.length; i++) {
-            options.push(<option>{categories[i]}</option>)
+        const options = [<option></option>];
+        for (let i = 0; i < CATEGORIES.length; i++) {
+            options.push(<option>{CATEGORIES[i]}</option>)
         }
         return (
             <label className={style.occasion}>

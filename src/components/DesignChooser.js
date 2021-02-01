@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-// import { SwatchesPicker } from 'react-color';
 import style from "./Form.css"
-import ColorPicker from "components/ColorPicker";
+import {getGoogleImages, importAll} from "components/utility";
 
 const MAX_STAMPS = 3; // max number of stamp selections allowed for custom card
 
@@ -13,26 +12,17 @@ class DesignChooser extends Component {
     // handleChange: event handler for change to form
 
     /**
-     * Load images
-     */
-    importAll = (r) => {
-        return r.keys().map(r);
-    };
-
-    /**
      * Load images from text files containing info about images stored on google drive
      */
-    getGoogleImages = () => {
+    loadImages = () => {
         let images;
         if (this.props.formType === "cards") {
-            // TODO: make seperate folder for this? --> add occassion to info
-            images = this.importAll(require.context('../card_images/cards', false, /\.txt$/));
+            return getGoogleImages("cards");
         } else if (this.props.formType === "custom") {
-            images = this.importAll(require.context('../card_images/stamps', false, /\.txt$/));
+            images = importAll(require.context('../card_images/stamps', false, /\.txt$/));
         } else if (this.props.formType === "inventory") {
-            images = this.importAll(require.context('../card_images/inventory', false, /\.txt$/));
+            images = importAll(require.context('../card_images/inventory', false, /\.txt$/));
         }
-        // console.log(images[0]['default'].split('\n').filter(x => x));
         return images[0]['default'].split('\n').filter(x => x);
     };
 
@@ -101,7 +91,7 @@ class DesignChooser extends Component {
         // render one section for card images if not custom request form
         // todo: update inventory in google drive with category in description, then delete this if
         if (this.props.formType === "inventory") {
-            let checkboxes = this.makeCheckboxes(this.getGoogleImages());
+            let checkboxes = this.makeCheckboxes(this.loadImages());
             return (
                 <div className={style["design-sections"]}>
                     <div className={style.section}>
@@ -116,7 +106,7 @@ class DesignChooser extends Component {
         // render section for each category of card/stamp for request form
         // sort images into categories
         let categories = {};
-        let images = this.getGoogleImages();
+        let images = this.loadImages();
         for (let imgInfo of images) {
             let category = imgInfo.split(",")[1].split(";")[0];
             if (!categories.hasOwnProperty(category)) {

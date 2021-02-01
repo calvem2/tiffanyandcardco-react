@@ -49,7 +49,7 @@ form {
     background: none;
     border: none;
     cursor: pointer;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 12pt;
     font-weight: bold;
     color: #09486B;
@@ -174,7 +174,7 @@ form {
 
 #start-button:hover {
     /*background-color: #c5c6c7;*/
-    color: darkgrey;
+    color: dimgrey;
     cursor: pointer;
 }
 
@@ -221,9 +221,10 @@ form {
 
 /* style category titles */
 h3 {
-    font-size: 14pt;
+    font-size: 18pt;
     margin-left: 50px;
-    color: #BABEBF;
+    color: dimgrey;
+    font-weight: normal;
 }
 
 /* style category sections */
@@ -401,7 +402,7 @@ textarea {
 }
 
 textarea::placeholder, input::placeholder {
-    font-family: "Mulish", sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 12pt;
     color: #BABEBF;
     /*border: 3px solid yellow;*/
@@ -431,7 +432,7 @@ img + .product p {
 .greeting-msg {
     font-size: 12.5pt;
     display: block;
-    /*color: darkgrey;*/
+    /*color: dimgrey;*/
     /*color: #FE9898;*/
     text-align: center;
     width: 50%;

@@ -13,6 +13,8 @@
 .gallery-container {
     display: flex;
     flex-direction: column;
+    /*justify-content: center;*/
+    /*height: 4000px;*/
     /*justify-content: flex-start;*/
     /*width: 75%;*/
     /*margin-bottom: 25px;*/
@@ -136,22 +138,24 @@ input[type="radio"] {
     display: none;
 }
 
-label {
+#category-selector label {
     display: block;
     /*border: 3px solid blue;*/
     font-family: 'Montserrat', sans-serif;
     font-size: 14pt;
+    /*font-weight: bold;*/
     /*padding-bottom: 5px;*/
     cursor: pointer;
 }
 
-label.unselected {
+#category-selector label.unselected {
     /*color: #c5c6c7;*/
-    color: #a9a9a9;
+    color: darkgrey;
 }
 
-label.selected, label:hover {
+#category-selector label.selected, #category-selector label:hover {
     color: #fc9d9a;
+    font-weight: bold;
 }
 
 
