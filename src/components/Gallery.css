@@ -120,11 +120,12 @@
 /* Selector style */
 #category-selector {
     /*float: left;*/
-    /*width: 100px;*/
+    width: 100px;
     /*margin-left: 5px;*/
     /*padding-right: 50px;*/
     /*position: absolute;*/
     /*left: 50px;*/
+    /*margin-right: 5px;*/
 }
 
 #gallery-container, #category-selector {
