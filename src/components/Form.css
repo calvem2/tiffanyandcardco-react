@@ -375,7 +375,7 @@ input[type="checkbox"] {
 /* style occasion selector */
 .occasion {
     display: block;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
     /*border: 3px solid green;*/
     height: 25px;
     /*width: 125px;*/
@@ -401,7 +401,7 @@ textarea {
     font-size: 12pt;
     border: 1px solid #ccc;
     border-radius: 4px;
-    height: 165px;
+    height: 150px;
     width: 350px;
 }
 

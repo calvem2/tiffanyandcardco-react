@@ -17,7 +17,7 @@ class Gallery extends Component {
         // clear loader
         setTimeout(function() {
             document.getElementById("loader-container").style.display = "none";
-            // document.getElementById(style['gallery']).style.display = "flex";
+            document.getElementById("g-gallery").style.display = "flex";
         }, 500);
     }
 
@@ -25,7 +25,7 @@ class Gallery extends Component {
         // clear loader
         setTimeout(function() {
             document.getElementById("loader-container").style.display = "none";
-            document.getElementById("gallery").style.display = "flex";
+            document.getElementById("g-gallery").style.display = "flex";
         }, 500);
     }
 
@@ -36,7 +36,7 @@ class Gallery extends Component {
     updateCategory = (newCategory) => {
         // display loader
         document.getElementById("loader-container").style.display = "block";
-        document.getElementById(style['gallery']).style.display = "none";
+        document.getElementById("g-gallery").style.display = "none";
         this.setState({
             category: newCategory
         });
@@ -78,34 +78,35 @@ class Gallery extends Component {
     /**
      * Produces array of rows of images for gallery
      */
-    makeGalleryRows = (imgs) => {
-        // construct rows of five images
-        let rows = [];
-        let numPerRow = (this.state.category === "home_page") ? 5 : 4;
-        let numRows = imgs.length / numPerRow;
-        for (let i = 0; i < numRows; i++) {
-            rows.push(
-                <div className={style.row}>
-                    {imgs.splice(0, numPerRow)}
-                </div>
-            );
-        }
-        // add any leftover images to last row
-        if (imgs.length > 0) {
-            rows.push(
-                <div className={style.row}>
-                    {imgs.splice(0, imgs.length)}
-                </div>
-            );
-        }
-        return rows;
-    };
+    // makeGalleryRows = (imgs) => {
+    //     // construct rows of five images
+    //     let rows = [];
+    //     let numPerRow = (this.state.category === "home_page") ? 5 : 4;
+    //     let numRows = imgs.length / numPerRow;
+    //     for (let i = 0; i < numRows; i++) {
+    //         rows.push(
+    //             <div className={style.row}>
+    //                 {imgs.splice(0, numPerRow)}
+    //             </div>
+    //         );
+    //     }
+    //     // add any leftover images to last row
+    //     if (imgs.length > 0) {
+    //         rows.push(
+    //             <div className={style.row}>
+    //                 {imgs.splice(0, imgs.length)}
+    //             </div>
+    //         );
+    //     }
+    //     return rows;
+    // };
 
 
     render() {
-        let rows = this.makeGalleryRows(this.makeGalleryImgs());
+        // let rows = this.makeGalleryRows(this.makeGalleryImgs());
+        let rows = this.makeGalleryImgs();
         return (
-            <div>
+        <div className={style["render-container"]}>
             <div className={style.gallery}>
                 {this.state.category !== "home_page" &&
                     <CategorySelector selected={this.state.category} onChange={this.updateCategory}/>
@@ -113,12 +114,11 @@ class Gallery extends Component {
                 <div id="loader-container" className={style["loader-container"]}>
                     <div className={style.loader}></div>
                 </div>
-                <div className={style['gallery-container']} id={this.state.category === "home_page" ? style["home-gallery"] : style["gallery"]}>
+                <div id="g-gallery" className={style['gallery-container']}>
                     {rows}
                 </div>
             </div>
-        {this.state.category !== "home_page" &&
-        <Footer/>}
+            {this.state.category !== "home_page" && <Footer/>}
         </div>
         );
     }
