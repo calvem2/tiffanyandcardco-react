@@ -1,6 +1,6 @@
-export const CATEGORIES = ["baby", "birthday", "calendar", "congratulations", "get well", "graduation",
+export const CATEGORIES = ["baby", "best wishes", "birthday", "calendar", "congratulations", "get well", "graduation",
     "greeting", "holiday", "retirement", "thank you", "wedding"];
-export const IMAGES = loadImages();
+export const CARD_IMAGES = loadImages();
 
 /**
  * Heplper function for loading image from a context
@@ -40,6 +40,8 @@ function loadImages() {
     images.set("retirement", importAll(require.context('../card_images/retirement', false, /\.txt$/))[0]['default'].split('\n').filter(x => x).map(s => s.trim()));
     images.set("thank you", importAll(require.context('../card_images/thank_you', false, /\.txt$/))[0]['default'].split('\n').filter(x => x).map(s => s.trim()));
     images.set("wedding", importAll(require.context('../card_images/wedding', false, /\.txt$/))[0]['default'].split('\n').filter(x => x).map(s => s.trim()));
+    images.set("inventory", importAll(require.context('../card_images/inventory', false, /\.txt$/))[0]['default'].split('\n').filter(x => x).map(s => s.trim()));
+    images.set("stamps", importAll(require.context('../card_images/stamps', false, /\.txt$/))[0]['default'].split('\n').filter(x => x).map(s => s.trim()));
     return images;
 }
 
@@ -52,10 +54,11 @@ export function getGoogleImages(category){
         for (let i = 0; i < CATEGORIES.length; i++) {
             // exclude calendar category from card images
             if (!(CATEGORIES[i] === "calendar" && category === "cards")) {
-                images = images.concat(IMAGES.get(CATEGORIES[i]));
+                images = images.concat(CARD_IMAGES.get(CATEGORIES[i]));
             }
         }
         return images
     }
-    return IMAGES.get(category);
+
+    return CARD_IMAGES.get(category);
 }

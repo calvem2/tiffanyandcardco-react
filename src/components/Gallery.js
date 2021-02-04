@@ -17,7 +17,7 @@ class Gallery extends Component {
         // clear loader
         setTimeout(function() {
             document.getElementById("loader-container").style.display = "none";
-            document.getElementById(style['gallery']).style.display = "flex";
+            // document.getElementById(style['gallery']).style.display = "flex";
         }, 500);
     }
 
@@ -25,7 +25,7 @@ class Gallery extends Component {
         // clear loader
         setTimeout(function() {
             document.getElementById("loader-container").style.display = "none";
-            document.getElementById(style['gallery']).style.display = "flex";
+            document.getElementById("gallery").style.display = "flex";
         }, 500);
     }
 
@@ -57,7 +57,6 @@ class Gallery extends Component {
             let src = imgInfo.split(",")[0];
             let descriptionText = imgInfo.split(",")[1].split(";");
             let description = [];
-            console.log(descriptionText);
             // add bullet point for each element in description if it's not empty
             // descriptions start at index 1 bc index 0 is category
             for (let i = 1; i < descriptionText.length; i++) {
@@ -116,7 +115,6 @@ class Gallery extends Component {
                 </div>
                 <div className={style['gallery-container']} id={this.state.category === "home_page" ? style["home-gallery"] : style["gallery"]}>
                     {rows}
-
                 </div>
             </div>
         {this.state.category !== "home_page" &&

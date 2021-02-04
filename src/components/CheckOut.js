@@ -64,7 +64,7 @@ class CheckOut extends Component {
                         {this.props.formType === "custom" &&
                         <Occasion
                             id={product}
-                            quantity={selections[product]["occasion"]}
+                            occasion={selections[product]["occasion"]}
                             onChange={this.handleInfoChange}
                         />
                         }

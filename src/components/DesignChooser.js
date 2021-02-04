@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import style from "./Form.css"
-import {getGoogleImages, importAll} from "components/utility";
+import {getGoogleImages} from "components/utility";
 
 const MAX_STAMPS = 3; // max number of stamp selections allowed for custom card
 
@@ -15,15 +15,19 @@ class DesignChooser extends Component {
      * Load images from text files containing info about images stored on google drive
      */
     loadImages = () => {
-        let images;
-        if (this.props.formType === "cards") {
-            return getGoogleImages("cards");
-        } else if (this.props.formType === "custom") {
-            images = importAll(require.context('../card_images/stamps', false, /\.txt$/));
-        } else if (this.props.formType === "inventory") {
-            images = importAll(require.context('../card_images/inventory', false, /\.txt$/));
-        }
-        return images[0]['default'].split('\n').filter(x => x);
+        let category = this.props.formType !== "custom" ? this.props.formType : "stamps";
+        return getGoogleImages(category);
+        // let images;
+        // if (this.props.formType === "cards") {
+        //     return getGoogleImages("cards");
+        // } else if (this.props.formType === "custom") {
+        //     // images = importAll(require.context('../card_images/stamps', false, /\.txt$/));
+        //     return getGoogleImages("stamps");
+        // } else if (this.props.formType === "inventory") {
+        //     // images = importAll(require.context('../card_images/inventory', false, /\.txt$/));
+        //     return getGoogleImages("inventory");
+        // }
+        // return images[0]['default'].split('\n').filter(x => x);
     };
 
     /**
@@ -74,10 +78,14 @@ class DesignChooser extends Component {
             // update appropriate data for inventory/from existing
             selections[event.target.id] = {quantity: 1, notes: ""};
             event.target.checked = true;
-        } else if (this.props.formType === "custom" && selections["custom"]["stamps"].length < MAX_STAMPS) {
-            // update appropriate data for custom card
-            selections["custom"]["stamps"].push(event.target.id);
-            event.target.checked = true;
+        } else if (this.props.formType === "custom") {
+            if (selections["custom"]["stamps"].length < MAX_STAMPS) {
+                // update appropriate data for custom card
+                selections["custom"]["stamps"].push(event.target.id);
+                event.target.checked = true;
+            } else {
+                alert("please choose a max of " + MAX_STAMPS + " stamp sets - a card is only so big!");
+            }
         } else {
             event.target.checked = false;
         }
@@ -88,21 +96,6 @@ class DesignChooser extends Component {
      * Render design options (cards or stamps)
      */
     designOptions = () => {
-        // render one section for card images if not custom request form
-        // todo: update inventory in google drive with category in description, then delete this if
-        if (this.props.formType === "inventory") {
-            let checkboxes = this.makeCheckboxes(this.loadImages());
-            return (
-                <div className={style["design-sections"]}>
-                    <div className={style.section}>
-                        <ul>
-                            {checkboxes}
-                        </ul>
-                    </div>
-                </div>
-            );
-        }
-
         // render section for each category of card/stamp for request form
         // sort images into categories
         let categories = {};
@@ -174,16 +167,16 @@ class DesignChooser extends Component {
     /**
      * Render short intro message
      */
-    greeting = () => {
-        if (this.props.formType === "custom") {
-            return (
-                <p className={style["greeting-msg"]}>
-                    Tell me a little bit about what you're looking for!
-                    Select some stamps you vibe with, and I'll whip something up for you!
-                </p>);
-        }
-        return null;
-    }
+    // greeting = () => {
+    //     if (this.props.formType === "custom") {
+    //         return (
+    //             <p className={style["greeting-msg"]}>
+    //                 Tell me a little bit about what you're looking for!
+    //                 Start by selecting some stamps you vibe with.
+    //             </p>);
+    //     }
+    //     return null;
+    // };
 
     render() {
         if (this.props.currentStep !== 1) {
@@ -192,7 +185,7 @@ class DesignChooser extends Component {
 
         return (
             <div className={style["form-group"]}>
-                {this.greeting()}
+                {/*{this.greeting()}*/}
                 {this.designOptions()}
                 {/*{this.colorChooser()}*/}
             </div>

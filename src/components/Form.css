@@ -227,6 +227,10 @@ h3 {
     font-weight: normal;
 }
 
+.design-sections {
+    width: 80%;
+    margin: auto;
+}
 /* style category sections */
 .section {
     /*margin-bottom: 25px;*/
@@ -435,7 +439,7 @@ img + .product p {
     /*color: dimgrey;*/
     /*color: #FE9898;*/
     text-align: center;
-    width: 50%;
+    width: 30%;
     margin: auto auto 25px;
 }
 
