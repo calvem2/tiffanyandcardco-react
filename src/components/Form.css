@@ -72,7 +72,7 @@ form {
 .submit {
     /*background: none;*/
     border: none;
-    font-family: 'Playfair Display', Serif;
+    font-family: 'Playfair Display', serif;
     font-size: 14pt;
     font-weight: bold;
     border-radius: 5px;
@@ -353,19 +353,19 @@ input[type="checkbox"] {
 
 /* QUANTITY */
 
-/* style quantity selector */
-.quantity {
+/* style quantity and occasion selector */
+.quantity, .occasion {
     display: block;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
     /*border: 3px solid green;*/
-    height: 25px;
-    width: 125px;
+    height: 35px;
+    width: 200px;
     font-size: 12pt;
     /*margin: 5px;*/
     /*color: dimgrey;*/
 }
 
-.quantity select {
+.quantity select, .occasion select {
     margin-left: 10px;
 
 }
@@ -373,21 +373,21 @@ input[type="checkbox"] {
 /* OCCASION */
 
 /* style occasion selector */
-.occasion {
-    display: block;
-    padding-bottom: 15px;
-    /*border: 3px solid green;*/
-    height: 25px;
-    /*width: 125px;*/
-    font-size: 12pt;
-    /*margin: 5px;*/
-    /*color: dimgrey;*/
-}
+/*.occasion {*/
+/*    display: block;*/
+/*    padding-bottom: 15px;*/
+/*    !*border: 3px solid green;*!*/
+/*    height: 35px;*/
+/*    !*width: 125px;*!*/
+/*    font-size: 12pt;*/
+/*    !*margin: 5px;*!*/
+/*    !*color: dimgrey;*!*/
+/*}*/
 
-.occasion select {
-    margin-left: 10px;
+/*.occasion select {*/
+/*    margin-left: 10px;*/
 
-}
+/*}*/
 
 
 /* NOTES */
