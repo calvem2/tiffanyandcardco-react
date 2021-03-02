@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DesignChooser from "./DesignChooser";
 import CheckOut from "components/CheckOut";
 import style from "./Form.css"
-import startImage from "../images/request_start.jpg";
 import classNames from 'classnames/bind';
 import OrderReview from "components/OrderReview";
 import FormMenu from "components/FormMenu";
@@ -38,12 +37,13 @@ class Form extends Component {
     validateInput = () => {
         if (this.state.currentStep === 1) {
             if (this.state.formType === "custom") {
-                return this.state.designChoices["custom"]["stamps"].length !== 0 //&&
-                       // this.state.designChoices["custom"]["colors"].length !== 0;
+                return this.state.designChoices["custom"]["stamps"].length !== 0
             }
             return Object.keys(this.state.designChoices).length !== 0;
         } else if (this.state.currentStep === 3) {
-            return this.state.email !== "" || this.state.insta !== "";
+            // validate email
+            return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.state.email) ||
+                this.state.insta !== "";
         } else if (this.state.currentStep === 2 && this.state.formType === "custom") {
             return this.state.designChoices["custom"]["occasion"] !== "";
         }
