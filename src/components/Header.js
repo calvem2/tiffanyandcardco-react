@@ -3,6 +3,9 @@ import Menu from "./Menu";
 import style from './Header.css';
 
 class Header extends Component {
+    // props
+    // menuValue: selected menu item
+
     render() {
         return (
             <div id={style.header}>

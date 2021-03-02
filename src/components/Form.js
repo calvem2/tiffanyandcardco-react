@@ -9,18 +9,17 @@ import * as emailjs from 'emailjs-com';
 
 const cx = classNames.bind(style);
 
+// Multi page request form
 class Form extends Component {
-    // props:
-    // products:
 
     constructor(props) {
         super(props);
         this.state = {
-            formType: "inventory",
-            currentStep: 0,                 // current step in the form
-            designChoices: {},              // user design selections; id mapped to quantity and notes
-            email: "",                      // user email address
-            insta: ""                       // user instagram handle
+            formType: "inventory",  // request type (from inventory, existing card, or custom)
+            currentStep: 0,         // current step in the form
+            designChoices: {},      // user design selections; photo id (or 'custom') mapped to info (quantity, notes, occasion, etc.)
+            email: "",              // user email address
+            insta: ""               // user instagram handle
         };
     }
 
@@ -95,8 +94,6 @@ class Form extends Component {
         return null;
     };
 
-
-
     /**
      * Renders next button if there is a next form section
      */
@@ -116,7 +113,24 @@ class Form extends Component {
             );
         }
         return null;
-    }
+    };
+
+    /**
+     * Render submit button
+     */
+    submitButton = () => {
+        let currentStep = this.state.currentStep;
+        if (currentStep === 3) {
+            let classNames = cx({
+                "submit": true,
+                disabled: !this.validateInput()
+            });
+            return (
+                <button className={classNames}>submit</button>
+            );
+        }
+        return null;
+    };
 
     /**
      * Renders title for current step in form
@@ -136,7 +150,7 @@ class Form extends Component {
             header = "your request has been sent!";
         }
         return (<h1>{header}</h1>)
-    }
+    };
 
     /**
      * Render request start screen
@@ -145,22 +159,18 @@ class Form extends Component {
         if (this.state.currentStep === 0) {
             return (
                 <div id={style.start}>
-                    {/*<img src={startImage}/>*/}
-                    {/*<div id={style["start-info-container"]}>*/}
                         <div id={style["start-info"]}>
-                            {/*<h1 id={style["request-header"]}>request</h1>*/}
                             <p>
                                 Hello! I'd love to craft something up for you.
                                 Tell me a little about your card needs and I'll be in touch!
                             </p>
                             <p id={style["start-button"]} onClick={this.next}>get started</p>
                         </div>
-                    {/*</div>*/}
                 </div>
             );
         }
         return null;
-    }
+    };
 
     /**
      * send email with request information
@@ -205,22 +215,7 @@ class Form extends Component {
             });
         }
     };
-    /**
-     * Render submit button
-     */
-    submitButton = () => {
-        let currentStep = this.state.currentStep;
-        if (currentStep === 3) {
-            let classNames = cx({
-                "submit": true,
-                disabled: !this.validateInput()
-            });
-            return (
-                <button className={classNames}>submit</button>
-            );
-        }
-        return null;
-    }
+
 
     render() {
         return (

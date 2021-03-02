@@ -11,7 +11,7 @@ class Notes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.note
+            value: this.props.note  // display value for notes input
         }
     }
 
@@ -22,7 +22,7 @@ class Notes extends Component {
         this.setState({value: event.target.value});
         let id = this.props.id;
         this.props.onChange("notes", id, event.target.value);
-    }
+    };
 
     render() {
         let placeholder;

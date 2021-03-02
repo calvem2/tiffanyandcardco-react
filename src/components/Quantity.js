@@ -12,7 +12,7 @@ class Quantity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.quantity
+            value: this.props.quantity  // selected quantity
         }
     }
     /**
@@ -22,7 +22,7 @@ class Quantity extends Component {
         this.setState({value: event.target.value});
         let id = this.props.id;
         this.props.onChange("quantity", id, event.target.value);
-    }
+    };
 
     render() {
         const options = [];

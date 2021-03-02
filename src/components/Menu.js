@@ -26,22 +26,6 @@ class Menu extends Component {
                    className={this.props.selected === "request" ? style.selected : style.unselected}>
                     REQUEST
                 </a>
-                {/*<div className={style.dropdown}>*/}
-                {/*    <button className={cx({*/}
-                {/*                        dropbtn: true,*/}
-                {/*                        selected: this.props.selected.includes("request"),*/}
-                {/*                        unselected: !this.props.selected.includes("request")})}>*/}
-                {/*        REQUEST*/}
-                {/*    </button>*/}
-                {/*    <div className={style['dropdown-content']}>*/}
-                {/*        <a className={this.props.selected.includes("inventory") ? style.selected : style.unselected}*/}
-                {/*           href="./inventory.html">inventory</a>*/}
-                {/*        <a className={this.props.selected.includes("cards") ? style.selected : style.unselected}*/}
-                {/*           href="./cards.html">choose from existing design</a>*/}
-                {/*        <a className={this.props.selected.includes("custom") ? style.selected : style.unselected}*/}
-                {/*           href="custom.html">start from scratch</a>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
     );
     }

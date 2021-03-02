@@ -5,20 +5,15 @@
 .flex {
     display: flex;
     margin: auto;
-    /*border: solid black 2px;*/
     width: 80%;
-    /*justify-content: space-evenly;*/
 }
 
 #image img {
-    /*flex-grow: 2;*/
     width: 300px;
 }
 
 #info {
-    /*flex-grow: 1;*/
     font-family: Montserrat, sans-serif;
-    /*border: solid 2px red;*/
     margin-left: 50px;
     color: gray;
     font-size: 18px;

@@ -4,6 +4,7 @@ import {getGoogleImages} from "components/utility";
 
 const MAX_STAMPS = 3; // max number of stamp selections allowed for custom card
 
+// Component for choosing card from a gallery of images
 class DesignChooser extends Component {
     // props
     // currentStep: current step in multi-form
@@ -17,17 +18,6 @@ class DesignChooser extends Component {
     loadImages = () => {
         let category = this.props.formType !== "custom" ? this.props.formType : "stamps";
         return getGoogleImages(category);
-        // let images;
-        // if (this.props.formType === "cards") {
-        //     return getGoogleImages("cards");
-        // } else if (this.props.formType === "custom") {
-        //     // images = importAll(require.context('../card_images/stamps', false, /\.txt$/));
-        //     return getGoogleImages("stamps");
-        // } else if (this.props.formType === "inventory") {
-        //     // images = importAll(require.context('../card_images/inventory', false, /\.txt$/));
-        //     return getGoogleImages("inventory");
-        // }
-        // return images[0]['default'].split('\n').filter(x => x);
     };
 
     /**
@@ -123,60 +113,10 @@ class DesignChooser extends Component {
         }
         return (
             <div className={style["design-sections"]}>
-                {/*<h2>STAMPS</h2>*/}
                 {sections}
             </div>
         );
     };
-
-    /**
-     * Renders section for choosing color preferences
-     */
-    // colorChooser = () => {
-    //     if (this.props.formType !== "custom") {
-    //         return null;
-    //     }
-    //
-    //     return (
-    //         <div className={style.section}>
-    //             <h2>COLORS</h2>
-    //             <div id={style["color-choosers"]}>
-    //                 <ColorPicker
-    //                     handleChange={this.onColorChange}
-    //                     // selectable={this.props.designChoices["custom"]["colors"].length < MAX_SELECTIONS}
-    //                     selected={this.props.designChoices["custom"]["colors"]}
-    //                 />
-    //             </div>
-    //         </div>
-    //     );
-    // };
-
-    /**
-     * Handles change to color chooser: removes color if it already exists in design choices; adds otherwise
-     */
-    // onColorChange = (color) => {
-    //     let designChoices = this.props.designChoices;
-    //     if (designChoices["custom"]["colors"].includes(color)) {
-    //         designChoices["custom"]["colors"].splice(designChoices["custom"]["colors"].indexOf(color), 1);
-    //     } else {
-    //         designChoices["custom"]["colors"].push(color);
-    //     }
-    //     this.props.handleChange({designChoices: designChoices})
-    // };
-
-    /**
-     * Render short intro message
-     */
-    // greeting = () => {
-    //     if (this.props.formType === "custom") {
-    //         return (
-    //             <p className={style["greeting-msg"]}>
-    //                 Tell me a little bit about what you're looking for!
-    //                 Start by selecting some stamps you vibe with.
-    //             </p>);
-    //     }
-    //     return null;
-    // };
 
     render() {
         if (this.props.currentStep !== 1) {
@@ -185,13 +125,9 @@ class DesignChooser extends Component {
 
         return (
             <div className={style["form-group"]}>
-                {/*{this.greeting()}*/}
                 {this.designOptions()}
-                {/*{this.colorChooser()}*/}
             </div>
         );
-
-
     }
 }
 

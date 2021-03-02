@@ -3,9 +3,9 @@ import Quantity from "components/Quantity";
 import Notes from "components/Notes";
 import style from "./Form.css";
 import customCard from "../images/custom_card.jpg";
-import FormMenu from "components/FormMenu";
 import Occasion from "components/Occasion";
 
+// Checkout page of request Form
 class CheckOut extends Component {
     // props
     // currentStep: current step in multi-form
@@ -28,7 +28,7 @@ class CheckOut extends Component {
         }
 
         this.props.handleChange({selections: selections});
-    }
+    };
 
     /**
      * Render description for card
@@ -40,7 +40,6 @@ class CheckOut extends Component {
         let design = this.props.designChoices["custom"];
         return (
             <div id={style.description}>
-                {/*<p>occasion: {design["occasion"]}</p>*/}
                 <p>stamps: {design["stamps"].toString().replace(/,/g, ", ")}</p>
             </div>
         );
@@ -85,7 +84,7 @@ class CheckOut extends Component {
         }
 
         return sections;
-    }
+    };
 
     render() {
         if (this.props.currentStep !== 2) {

@@ -5,11 +5,12 @@ import * as _ from "underscore";
 import Footer from "components/Footer";
 import {getGoogleImages} from "components/utility";
 
+// Displays grid of images
 class Gallery extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: this.props.initialCategory
+            category: this.props.initialCategory    // category of images to display in gallery
         };
     }
 
@@ -75,35 +76,7 @@ class Gallery extends Component {
         return imgs;
     };
 
-    /**
-     * Produces array of rows of images for gallery
-     */
-    // makeGalleryRows = (imgs) => {
-    //     // construct rows of five images
-    //     let rows = [];
-    //     let numPerRow = (this.state.category === "home_page") ? 5 : 4;
-    //     let numRows = imgs.length / numPerRow;
-    //     for (let i = 0; i < numRows; i++) {
-    //         rows.push(
-    //             <div className={style.row}>
-    //                 {imgs.splice(0, numPerRow)}
-    //             </div>
-    //         );
-    //     }
-    //     // add any leftover images to last row
-    //     if (imgs.length > 0) {
-    //         rows.push(
-    //             <div className={style.row}>
-    //                 {imgs.splice(0, imgs.length)}
-    //             </div>
-    //         );
-    //     }
-    //     return rows;
-    // };
-
-
     render() {
-        // let rows = this.makeGalleryRows(this.makeGalleryImgs());
         let rows = this.makeGalleryImgs();
         return (
         <div className={style["render-container"]}>

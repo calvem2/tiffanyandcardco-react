@@ -24,19 +24,20 @@ class OrderReview extends Component {
      */
     onEmailChange = (event) => {
         this.setState({email: event.target.value});
-        // let id = this.props.id;
         this.props.handleChange({email: event.target.value});
-    }
+    };
 
     /**
      * Handle change to instagram input
      */
     onInstaChange = (event) => {
         this.setState({insta: event.target.value});
-        // let id = this.props.id;
         this.props.handleChange({insta: event.target.value});
-    }
+    };
 
+    /**
+     * Render review section for each design selection
+     */
     makeSections = () => {
         // return design info for custom card
         if (this.props.formType === "custom") {
@@ -120,7 +121,7 @@ class OrderReview extends Component {
                 </div>
             </div>
         );
-    }
+    };
 
     /**
      * Return short intro message
@@ -139,7 +140,6 @@ class OrderReview extends Component {
         }
         return (
             <div className={style["form-group"]}>
-                {/*<p className={style["greeting-msg"]}>{this.greeting()}</p>*/}
                 <div id={style["review-products"]}>
                     {this.makeSections()}
                 </div>

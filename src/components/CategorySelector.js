@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import style from "components/Gallery.css";
 import {CATEGORIES} from "components/utility";
 
+// Menu to select category of images displayed in Gallery or DesignChooser
 class CategorySelector extends Component {
     // props
     // selected: current category selected

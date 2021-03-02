@@ -12,7 +12,7 @@ class Occasion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.occasion
+            value: this.props.occasion  // selected value
         }
     }
     /**

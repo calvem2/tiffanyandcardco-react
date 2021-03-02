@@ -3,25 +3,11 @@ export const CATEGORIES = ["baby", "best wishes", "birthday", "calendar", "congr
 export const CARD_IMAGES = loadImages();
 
 /**
- * Heplper function for loading image from a context
+ * Helper function for loading image from a context
  */
 export function importAll(r) {
     return r.keys().map(r);
 }
-
-// getLocalImages = () => {
-//     // FOR LOCAL
-//     const images = this.importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
-//     // console.log("these are the images");
-//     // console.log(images);
-//     let imgs = [];
-//     for (let [index, module] of Object.entries(images)) {
-//         // console.log(index);
-//         // console.log(module['default']);
-//         imgs.push(<img src={module['default']}/>);
-//     }
-//     return imgs;
-// };
 
 /**
  * Load images from text files containing info about images stored on google drive
