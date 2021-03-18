@@ -70,6 +70,7 @@ class CheckOut extends Component {
                         <Quantity
                             id={product}
                             quantity={selections[product]["quantity"]}
+                            maxQuantity={selections[product]["maxQuantity"]}
                             onChange={this.handleInfoChange}
                         />
                         <Notes

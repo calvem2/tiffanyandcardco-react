@@ -8,6 +8,7 @@ class Quantity extends Component {
     // id: id of choice this quantity selector corresponds to
     // quantity: initial display value for quantity selector
     // handleChange: event handler for change to form
+    // maxQuantity: max quantity (undefined except for inventory selections)
 
     constructor(props) {
         super(props);
@@ -26,7 +27,8 @@ class Quantity extends Component {
 
     render() {
         const options = [];
-        for (let i = 1; i <= MAX_QUANTITY; i++) {
+        let quantity = this.props.maxQuantity !== undefined ? parseInt(this.props.maxQuantity) : MAX_QUANTITY;
+        for (let i = 1; i <= quantity; i++) {
             options.push(<option>{i}</option>)
         }
         return (

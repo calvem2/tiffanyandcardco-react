@@ -40,8 +40,6 @@ class DesignChooser extends Component {
                 } else {
                     imageData[types[i]] = results;
                 }
-                console.log(types[i]);
-                console.log(results);
             }).catch(err => {
                 console.log(err);
             });
@@ -50,7 +48,6 @@ class DesignChooser extends Component {
         this.setState({
             imageData: imageData
         });
-        console.log(imageData);
     }
 
     /**
@@ -107,6 +104,15 @@ class DesignChooser extends Component {
         } else if (this.props.formType !== "custom") {
             // update appropriate data for inventory/from existing
             selections[event.target.id] = {quantity: 1, notes: ""};
+
+            // update max quantity for inventory
+            if (this.props.formType === "inventory") {
+                let imgInfo = this.state.imageData["inventory"].filter(img => {
+                    return img.url === event.target.id
+                })[0];
+                selections[event.target.id]["maxQuantity"] = imgInfo.quantity;
+            }
+
             event.target.checked = true;
         } else if (this.props.formType === "custom") {
             if (selections["custom"]["stamps"].length < MAX_STAMPS) {
