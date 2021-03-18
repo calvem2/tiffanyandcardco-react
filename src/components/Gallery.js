@@ -11,7 +11,7 @@ class Gallery extends Component {
         super(props);
         this.state = {
             category: this.props.initialCategory,   // category of images to display in gallery
-            imageData: []                           // metadata more images to display
+            imageData: []                           // metadata for images to display
         };
     }
 
@@ -22,7 +22,7 @@ class Gallery extends Component {
             document.getElementById("g-gallery").style.display = "flex";
         }, 500);
 
-        // fetch image data
+        // set fetch options
         let options = {
             sheetId: '1S_GLsf_4g2aDGEnJPsDvkvokQ0V8sIvLN5_py09fIxY',
             sheetNumber: 1,

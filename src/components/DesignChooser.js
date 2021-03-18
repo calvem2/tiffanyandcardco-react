@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import style from "./Form.css"
-import {getGoogleImages} from "components/utility";
+const GSheetReader = require('g-sheets-api');
 
 const MAX_STAMPS = 3; // max number of stamp selections allowed for custom card
 
@@ -12,26 +12,66 @@ class DesignChooser extends Component {
     // designChoices: choices selected
     // handleChange: event handler for change to form
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageData: []       // metadata for images to display
+        };
+    }
+
+    componentDidMount() {
+        // fetch images from google sheet
+        let types = ["cards", "stamps", "inventory"];
+        let imageData = {};
+        for (let i = 0; i < types.length; i++) {
+            let options = {
+                sheetId: '1S_GLsf_4g2aDGEnJPsDvkvokQ0V8sIvLN5_py09fIxY',
+                sheetNumber: i + 1,
+                returnAllResults: false,
+            };
+
+            // fetch data
+            GSheetReader(options, results => {
+                // map form type to images, excluding calendars from 'cards' form type
+                if (types[i] === "cards") {
+                    imageData[types[i]] = results.filter(function(img) {
+                        return img.category !== "calendar";
+                    });
+                } else {
+                    imageData[types[i]] = results;
+                }
+                console.log(types[i]);
+                console.log(results);
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+
+        this.setState({
+            imageData: imageData
+        });
+        console.log(imageData);
+    }
+
     /**
-     * Load images from text files containing info about images stored on google drive
+     * Get images for the current form type
      */
     loadImages = () => {
         let category = this.props.formType !== "custom" ? this.props.formType : "stamps";
-        return getGoogleImages(category);
+        return this.state.imageData[category];
     };
 
     /**
      * Produce checkbox choices to be displayed for given images
      */
-    makeCheckboxes = (images) => {
+    makeCheckboxes = (imageData) => {
         let choices = [];
-        for (let imgInfo of images) {
-            let src = imgInfo.split(",")[0];
+        for (let img of imageData) {
             // set id to stamp set name for custom; img src otherwise
-            let id = this.props.formType === "custom" ? imgInfo.split(",")[1].split(";")[1] : src;
+            let id = this.props.formType === "custom" ? img.name : img.url;
 
             // Check to see if card image or stamp image for custom card has been checked
-            let checked = this.props.designChoices.hasOwnProperty(src) ||
+            let checked = this.props.designChoices.hasOwnProperty(img.url) ||
                 (this.props.designChoices.hasOwnProperty("custom") && this.props.designChoices["custom"]["stamps"].includes(id));
 
             // make checkbox for each choice
@@ -44,7 +84,7 @@ class DesignChooser extends Component {
                         checked={checked}
                     />
                     <label htmlFor={id} className={style["design-choice"]}>
-                        <img src={src}/>
+                        <img src={img.url}/>
                     </label>
                 </li>
             );
@@ -89,13 +129,12 @@ class DesignChooser extends Component {
         // render section for each category of card/stamp for request form
         // sort images into categories
         let categories = {};
-        let images = this.loadImages();
-        for (let imgInfo of images) {
-            let category = imgInfo.split(",")[1].split(";")[0];
-            if (!categories.hasOwnProperty(category)) {
-                categories[category] = [];
+        let imageData = this.loadImages();
+        for (let img of imageData) {
+            if (!categories.hasOwnProperty(img.category)) {
+                categories[img.category] = [];
             }
-            categories[category].push(imgInfo);
+            categories[img.category].push(img);
         }
 
         // get checkboxes for each category
