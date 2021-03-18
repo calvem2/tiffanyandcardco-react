@@ -1,6 +1,12 @@
+// google sheet: https://docs.google.com/spreadsheets/d/e/2PACX-1vSR6hThdodXUYq3JZ_K200uyLO0mkml2EGMpJ1eE8eJAFAsA-BOLHTrjSVpjumca_QI8TIyPfQDS_qq/pub?output=csv
+// https://docs.google.com/spreadsheets/d/1S_GLsf_4g2aDGEnJPsDvkvokQ0V8sIvLN5_py09fIxY/edit?usp=sharing
 export const CATEGORIES = ["baby", "best wishes", "birthday", "calendar", "congratulations", "get well", "graduation",
     "greeting", "holiday", "retirement", "thank you", "wedding"];
 export const CARD_IMAGES = loadImages();
+const GSheetReader = require('g-sheets-api');
+import regeneratorRuntime from "regenerator-runtime";
+// loadCardImageData();
+
 
 /**
  * Helper function for loading image from a context
@@ -8,6 +14,43 @@ export const CARD_IMAGES = loadImages();
 export function importAll(r) {
     return r.keys().map(r);
 }
+
+/**
+ * Load card image data from google sheet
+ */
+export async function loadCardImageData(category) {
+    // todo: filter calendar from cards fetch (done somewhere else)
+    // set options for fetching from sheet
+    let options = {
+        sheetId: '1S_GLsf_4g2aDGEnJPsDvkvokQ0V8sIvLN5_py09fIxY',
+        sheetNumber: 1,
+        returnAllResults: false,
+    };
+    // filter by category if necessary
+    if (!(category === "home_page" || category === "all" || category === "cards")) {
+        options.filter = {
+            'category': category,
+        };
+        options.filterOptions = {
+            matching: 'strict'
+        };
+    }
+
+    // fetch data
+    let test;
+    await GSheetReader(options, async function(results) {
+         console.log(results);
+        test = await results;
+        console.log(test);
+        // return test;
+    }).catch(err => {
+        // do something with the error message here
+        console.log(err);
+    });
+    console.log(test);
+    // return test;
+}
+
 
 /**
  * Load images from text files containing info about images stored on google drive
